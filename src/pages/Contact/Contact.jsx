@@ -134,7 +134,7 @@ export default function Contact() {
                       rel="noopener noreferrer"
                       className="text-gray-400 hover:text-blue-400 transition-colors"
                     >
-                      +91-9076823328
+                      +919076823328
                     </a>
                   </div>
                 </div>
