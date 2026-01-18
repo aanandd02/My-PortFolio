@@ -1,5 +1,5 @@
 import React from "react";
-import { Layers, Network, Code2 } from "lucide-react";
+import { Layers, Network, Code2, Server } from "lucide-react";
 
 const ExperienceCard = ({ title, company, period, description, icon: Icon }) => (
   <div className="group relative overflow-hidden rounded-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
@@ -16,12 +16,18 @@ const ExperienceCard = ({ title, company, period, description, icon: Icon }) => 
       </div>
 
       <div className="space-y-3 relative z-10">
-        <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">{title}</h3>
+        <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+          {title}
+        </h3>
         <div className="flex justify-between items-center text-gray-300">
           <span className="font-semibold text-blue-400">{company}</span>
-          <span className="text-sm font-mono bg-blue-500/10 px-3 py-1 rounded-full">{period}</span>
+          <span className="text-sm font-mono bg-blue-500/10 px-3 py-1 rounded-full">
+            {period}
+          </span>
         </div>
-        <p className="text-gray-300 border-l-4 border-blue-500/50 pl-4 mt-4 leading-relaxed">{description}</p>
+        <p className="text-gray-300 border-l-4 border-blue-500/50 pl-4 mt-4 leading-relaxed">
+          {description}
+        </p>
       </div>
     </div>
   </div>
@@ -29,6 +35,14 @@ const ExperienceCard = ({ title, company, period, description, icon: Icon }) => 
 
 const ExperienceSection = () => {
   const experiences = [
+    {
+      icon: Server,
+      title: "Backend Intern",
+      company: "Synup",
+      period: "Jan 2026 – Present",
+      description:
+        "Working on backend development using Node.js and databases, building scalable APIs, improving system reliability, and collaborating with frontend and product teams to deliver production-ready features.",
+    },
     {
       icon: Code2,
       title: "Full Stack Developer Intern",
@@ -65,7 +79,7 @@ const ExperienceSection = () => {
             Experience & Involvement
           </h2>
           <p className="text-lg md:text-xl text-gray-400 font-medium tracking-wide text-center max-w-2xl">
-            Showcasing event coordination, internships, and professional development experiences.
+            Showcasing internships, backend experience, and professional involvement.
           </p>
         </div>
 
