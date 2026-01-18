@@ -1,5 +1,20 @@
 import React, { useState } from "react";
 import { Send, Phone, MapPin, Mail, Linkedin, Github } from "lucide-react";
+import { motion } from "framer-motion";
+
+const container = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.15 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -8,290 +23,199 @@ export default function Contact() {
     subject: "",
     message: "",
   });
-
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState(null);
 
   const validateForm = () => {
-    let tempErrors = {};
-    let isValid = true;
-
-    if (!formData.name.trim()) {
-      tempErrors.name = "Name is required";
-      isValid = false;
-    }
-
-    if (!formData.email.trim()) {
-      tempErrors.email = "Email is required";
-      isValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      tempErrors.email = "Email is invalid";
-      isValid = false;
-    }
-
-    if (!formData.subject.trim()) {
-      tempErrors.subject = "Subject is required";
-      isValid = false;
-    }
-
-    if (!formData.message.trim()) {
-      tempErrors.message = "Message is required";
-      isValid = false;
-    }
-
-    setErrors(tempErrors);
-    return isValid;
+    let temp = {};
+    if (!formData.name.trim()) temp.name = "Name is required";
+    if (!formData.email.trim()) temp.email = "Email is required";
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) temp.email = "Invalid email";
+    if (!formData.subject.trim()) temp.subject = "Subject is required";
+    if (!formData.message.trim()) temp.message = "Message is required";
+    setErrors(temp);
+    return Object.keys(temp).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!validateForm()) {
-      setStatus("Please fill in all required fields correctly.");
-      return;
-    }
+    if (!validateForm()) return;
 
     const form = new FormData();
     form.append("access_key", "f94db06b-b8c1-42b1-b610-48429b0adf32");
-    form.append("name", formData.name);
-    form.append("email", formData.email);
-    form.append("subject", formData.subject || "New Contact Form Submission");
-    form.append("message", formData.message);
+    Object.entries(formData).forEach(([k, v]) => form.append(k, v));
 
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         body: form,
       });
-
-      const result = await response.json();
-
-      if (response.ok) {
+      const data = await res.json();
+      if (res.ok) {
         setStatus("Message sent successfully!");
-        setFormData({
-          name: "",
-          email: "",
-          subject: "",
-          message: "",
-        });
+        setFormData({ name: "", email: "", subject: "", message: "" });
         setErrors({});
-      } else {
-        setStatus(result.message || "There was an error sending your message.");
-      }
-    } catch (error) {
-      setStatus("An error occurred. Please try again.");
-      console.error("Error:", error);
+      } else setStatus(data.message || "Error sending message");
+    } catch {
+      setStatus("Something went wrong. Try again.");
     }
   };
 
   return (
-    <main className="pt-28 bg-[#04081A] text-white min-h-screen">
-      <section className="hero min-h-screen flex items-center relative px-4 sm:px-6 lg:px-8">
-        <div className="container mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            
-            {/* Contact Info */}
-            <div className="space-y-8">
-              <div>
-                <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-                  Get in Touch!
-                </h2>
-                <p className="text-gray-300 text-lg">
-                  Have an opportunity, project, or collaboration in mind? 
-                  Let’s connect and build something impactful together.
-                </p>
-              </div>
+    <section className="min-h-screen bg-[#04081A] py-32 relative overflow-hidden">
+      {/* background glow */}
+      <div className="absolute top-20 left-20 w-96 h-96 bg-cyan-500/10 blur-3xl rounded-full" />
+      <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/10 blur-3xl rounded-full" />
 
-              <div className="space-y-6">
-                {/* Email */}
-                <div className="flex items-center space-x-4">
-                  <div className="bg-purple-500/10 p-3 rounded-lg">
-                    <Mail className="w-6 h-6 text-purple-400" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold">Email</h3>
-                    <a 
-                      href="mailto:aanandd9076@gmail.com" 
+      <div className="container mx-auto px-6 relative z-10">
+        {/* header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-20"
+        >
+          <h2 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent">
+            Get in Touch
+          </h2>
+          <p className="text-gray-400 mt-4 max-w-xl mx-auto">
+            Have an opportunity or idea? Let’s build something impactful.
+          </p>
+        </motion.div>
+
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid lg:grid-cols-2 gap-16 items-center"
+        >
+          {/* CONTACT INFO */}
+          <motion.div variants={item} className="space-y-8">
+            {[
+              {
+                icon: Mail,
+                label: "Email",
+                value: "aanandd9076@gmail.com",
+                link: "mailto:aanandd9076@gmail.com",
+              },
+              {
+                icon: Phone,
+                label: "Phone",
+                value: "+91-9076823328",
+                link: "tel:+919076823328",
+              },
+              {
+                icon: MapPin,
+                label: "Location",
+                value: "Mirzapur, Uttar Pradesh, India",
+              },
+              {
+                icon: Linkedin,
+                label: "LinkedIn",
+                value: "linkedin.com/in/aanandd02",
+                link: "https://www.linkedin.com/in/aanandd02/",
+              },
+              {
+                icon: Github,
+                label: "GitHub",
+                value: "github.com/aanandd02",
+                link: "https://github.com/aanandd02",
+              },
+            ].map((c, i) => (
+              <div key={i} className="flex items-center gap-4">
+                <div className="p-3 rounded-xl bg-white/5 border border-white/10">
+                  <c.icon className="w-5 h-5 text-cyan-400" />
+                </div>
+                <div>
+                  <p className="font-medium">{c.label}</p>
+                  {c.link ? (
+                    <a
+                      href={c.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-purple-400 transition-colors"
+                      className="text-gray-400 hover:text-cyan-400 transition-colors"
                     >
-                      aanandd9076@gmail.com
+                      {c.value}
                     </a>
-                  </div>
-                </div>
-
-                {/* Phone */}
-                <div className="flex items-center space-x-4">
-                  <div className="bg-blue-500/10 p-3 rounded-lg">
-                    <Phone className="w-6 h-6 text-blue-400" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold">Phone</h3>
-                    <a 
-                      href="tel:+919076823328" 
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-blue-400 transition-colors"
-                    >
-                      +91-9076823328
-                    </a>
-                  </div>
-                </div>
-
-                {/* Location */}
-                <div className="flex items-center space-x-4">
-                  <div className="bg-pink-500/10 p-3 rounded-lg">
-                    <MapPin className="w-6 h-6 text-pink-400" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold">Location</h3>
-                    <p className="text-gray-400">Mirzapur, Uttar Pradesh, India</p>
-                  </div>
-                </div>
-
-                {/* LinkedIn */}
-                <div className="flex items-center space-x-4">
-                  <div className="bg-indigo-500/10 p-3 rounded-lg">
-                    <Linkedin className="w-6 h-6 text-indigo-400" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold">LinkedIn</h3>
-                    <a 
-                      href="https://www.linkedin.com/in/aanandd02/"
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-indigo-400 transition-colors"
-                    >
-                      linkedin.com/in/aanandd02
-                    </a>
-                  </div>
-                </div>
-
-                {/* GitHub */}
-                <div className="flex items-center space-x-4">
-                  <div className="bg-gray-500/10 p-3 rounded-lg">
-                    <Github className="w-6 h-6 text-gray-400" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold">GitHub</h3>
-                    <a 
-                      href="https://github.com/aanandd02" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-gray-200 transition-colors"
-                    >
-                      github.com/aanandd02
-                    </a>
-                  </div>
+                  ) : (
+                    <p className="text-gray-400">{c.value}</p>
+                  )}
                 </div>
               </div>
-            </div>
+            ))}
+          </motion.div>
 
-            {/* Contact Form */}
-            <div className="backdrop-blur-lg bg-white/5 p-8 rounded-2xl shadow-xl">
+          {/* FORM */}
+          <motion.div
+            variants={item}
+            className="relative group rounded-2xl"
+          >
+            {/* glow border */}
+            <div className="absolute -inset-[1.5px] bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 rounded-2xl opacity-0 group-hover:opacity-100 blur-sm transition duration-500" />
+
+            <div className="relative bg-gray-900/80 backdrop-blur-xl border border-white/10 rounded-2xl p-8">
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 gap-6">
-                  <div>
+                {["name", "email", "subject"].map((field) => (
+                  <div key={field}>
                     <input
-                      type="text"
-                      placeholder="Your Name"
-                      className={`w-full px-4 py-3 rounded-lg bg-white/5 border ${
-                        errors.name ? "border-red-500" : "border-gray-700"
-                      } focus:border-blue-500 focus:outline-none transition-colors`}
-                      value={formData.name}
+                      type={field === "email" ? "email" : "text"}
+                      placeholder={`Your ${field}`}
+                      value={formData[field]}
                       onChange={(e) =>
-                        setFormData({ ...formData, name: e.target.value })
+                        setFormData({ ...formData, [field]: e.target.value })
                       }
+                      className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 focus:border-cyan-400 outline-none"
                     />
-                    {errors.name && (
-                      <p className="text-red-500 text-sm mt-1">{errors.name}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <input
-                      type="email"
-                      placeholder="Your Email"
-                      className={`w-full px-4 py-3 rounded-lg bg-white/5 border ${
-                        errors.email ? "border-red-500" : "border-gray-700"
-                      } focus:border-blue-500 focus:outline-none transition-colors`}
-                      value={formData.email}
-                      onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
-                      }
-                    />
-                    {errors.email && (
-                      <p className="text-red-500 text-sm mt-1">
-                        {errors.email}
+                    {errors[field] && (
+                      <p className="text-red-400 text-sm mt-1">
+                        {errors[field]}
                       </p>
                     )}
                   </div>
+                ))}
 
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="Subject"
-                      className={`w-full px-4 py-3 rounded-lg bg-white/5 border ${
-                        errors.subject ? "border-red-500" : "border-gray-700"
-                      } focus:border-blue-500 focus:outline-none transition-colors`}
-                      value={formData.subject}
-                      onChange={(e) =>
-                        setFormData({ ...formData, subject: e.target.value })
-                      }
-                    />
-                    {errors.subject && (
-                      <p className="text-red-500 text-sm mt-1">
-                        {errors.subject}
-                      </p>
-                    )}
-                  </div>
-
-                  <div>
-                    <textarea
-                      placeholder="Your Message"
-                      rows="4"
-                      className={`w-full px-4 py-3 rounded-lg bg-white/5 border ${
-                        errors.message ? "border-red-500" : "border-gray-700"
-                      } focus:border-blue-500 focus:outline-none transition-colors resize-none`}
-                      value={formData.message}
-                      onChange={(e) =>
-                        setFormData({ ...formData, message: e.target.value })
-                      }
-                    ></textarea>
-                    {errors.message && (
-                      <p className="text-red-500 text-sm mt-1">
-                        {errors.message}
-                      </p>
-                    )}
-                  </div>
+                <div>
+                  <textarea
+                    rows="4"
+                    placeholder="Your Message"
+                    value={formData.message}
+                    onChange={(e) =>
+                      setFormData({ ...formData, message: e.target.value })
+                    }
+                    className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 focus:border-cyan-400 outline-none resize-none"
+                  />
+                  {errors.message && (
+                    <p className="text-red-400 text-sm mt-1">
+                      {errors.message}
+                    </p>
+                  )}
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3 px-6 rounded-lg font-semibold flex items-center justify-center space-x-2 hover:opacity-90 transition-opacity"
+                  className="w-full py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 font-semibold flex items-center justify-center gap-2 hover:opacity-90 transition"
                 >
-                  <span>Send Message</span>
-                  <Send className="w-4 h-4" />
+                  Send Message <Send className="w-4 h-4" />
                 </button>
               </form>
 
-              {/* Status Message */}
               {status && (
-                <div
+                <p
                   className={`mt-4 text-center ${
                     status.includes("success")
                       ? "text-green-400"
                       : "text-red-400"
                   }`}
                 >
-                  <p>{status}</p>
-                </div>
+                  {status}
+                </p>
               )}
             </div>
-          </div>
-        </div>
-      </section>
-    </main>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
   );
 }

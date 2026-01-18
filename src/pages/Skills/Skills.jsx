@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import IconCloudDemo from "@/components/globe";
@@ -35,36 +36,62 @@ import {
   SiFastapi,
 } from "react-icons/si";
 
+/* ---------- animations ---------- */
+const container = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.12 },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
+
 const SkillCard = ({ icon: Icon, title, skills, color }) => (
-  <Card className="group relative overflow-hidden bg-gray-900/80 border-gray-700 hover:scale-[1.02] transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/20">
-    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[rgba(100,100,255,0.1)] to-transparent group-hover:via-[rgba(100,100,255,0.2)] animate-shimmer"></div>
-    <CardContent className="p-6 relative z-10">
-      <div className="flex items-center gap-4 mb-6">
-        <div
-          className={`p-3 rounded-xl bg-gray-800/50 ${color} group-hover:scale-110 transition-transform duration-300`}
-        >
-          <Icon className="w-8 h-8" />
-        </div>
-        <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
-          {title}
-        </h3>
-      </div>
-      <div className="flex flex-wrap gap-2">
-        {skills.map((skill, index) => (
-          <Badge
-            key={index}
-            variant="outline"
-            className="group/badge relative bg-gray-800/50 hover:bg-gray-700/80 text-gray-100 border-gray-600 flex items-center gap-2 py-2 px-3 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20"
-          >
-            <span className="transform group-hover/badge:scale-110 transition-transform duration-300">
-              {skill.icon}
-            </span>
-            <span className="font-medium">{skill.name}</span>
-          </Badge>
-        ))}
-      </div>
-    </CardContent>
-  </Card>
+  <motion.div variants={item} whileHover={{ y: -6 }}>
+    <div className="group relative rounded-xl">
+      {/* premium border glow */}
+      <div className="absolute -inset-[1.5px] bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 rounded-xl opacity-0 group-hover:opacity-100 blur-sm transition duration-500" />
+
+      <Card className="relative bg-gray-900/80 backdrop-blur-xl border border-white/10 rounded-xl">
+        <CardContent className="p-6">
+          {/* header */}
+          <div className="flex items-center gap-4 mb-6">
+            <motion.div
+              animate={{ y: [0, -5, 0] }}
+              transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+              className={`p-3 rounded-xl bg-gray-800/60 ${color}`}
+            >
+              <Icon className="w-7 h-7" />
+            </motion.div>
+            <h3 className="text-xl font-semibold text-white tracking-wide">
+              {title}
+            </h3>
+          </div>
+
+          {/* badges */}
+          <div className="flex flex-wrap gap-2">
+            {skills.map((skill, index) => (
+              <Badge
+                key={index}
+                variant="outline"
+                className="bg-white/5 border-white/10 text-gray-200 hover:bg-white/10 transition-all duration-300 hover:scale-105"
+              >
+                <span className="mr-2">{skill.icon}</span>
+                {skill.name}
+              </Badge>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  </motion.div>
 );
 
 const SkillsSection = () => {
@@ -76,14 +103,8 @@ const SkillsSection = () => {
       skills: [
         { name: "C", icon: <SiC className="w-4 h-4 text-[#A8B9CC]" /> },
         { name: "Java", icon: <FaJava className="w-4 h-4 text-[#E11F21]" /> },
-        {
-          name: "Python",
-          icon: <SiPython className="w-4 h-4 text-[#3776AB]" />,
-        },
-        {
-          name: "JavaScript",
-          icon: <SiJavascript className="w-4 h-4 text-[#F7DF1E]" />,
-        },
+        { name: "Python", icon: <SiPython className="w-4 h-4 text-[#3776AB]" /> },
+        { name: "JavaScript", icon: <SiJavascript className="w-4 h-4 text-[#F7DF1E]" /> },
         { name: "SQL", icon: <SiMysql className="w-4 h-4 text-[#00618A]" /> },
       ],
     },
@@ -95,18 +116,8 @@ const SkillsSection = () => {
         { name: "Node.js", icon: <FaNodeJs className="w-4 h-4 text-[#339933]" /> },
         { name: "Express.js", icon: <SiExpress className="w-4 h-4 text-white" /> },
         { name: "FastAPI", icon: <SiFastapi className="w-4 h-4 text-[#009688]" /> },
-        { name: "RESTful APIs", icon: <Terminal className="w-4 h-4 text-[#FF6C37]" /> },
-        { name: "JWT Auth", icon: <Terminal className="w-4 h-4 text-[#F59E0B]" /> },
-        { name: "Middleware Design", icon: <Cpu className="w-4 h-4 text-[#22C55E]" /> },
-      ],
-    },
-    {
-      icon: Database,
-      title: "Databases",
-      color: "text-purple-400",
-      skills: [
-        { name: "MongoDB", icon: <SiMongodb className="w-4 h-4 text-[#47A248]" /> },
-        { name: "SQL", icon: <SiMysql className="w-4 h-4 text-[#00618A]" /> },
+        { name: "REST APIs", icon: <Terminal className="w-4 h-4 text-orange-400" /> },
+        { name: "JWT Auth", icon: <Terminal className="w-4 h-4 text-yellow-400" /> },
       ],
     },
     {
@@ -114,20 +125,9 @@ const SkillsSection = () => {
       title: "AI & LLM Tools",
       color: "text-pink-400",
       skills: [
-        {
-          name: "LangChain",
-          icon: <SiLangchain className="w-4 h-4 text-[#5C2D91]" />,
-        },
-        {
-          name: "Hugging Face",
-          icon: <SiHuggingface className="w-4 h-4 text-[#FF9E0F]" />,
-        },
-        { name: "Ollama", icon: <Brain className="w-4 h-4 text-[#38BDF8]" /> },
-        { name: "LM Studio", icon: <Brain className="w-4 h-4 text-[#F472B6]" /> },
-        {
-          name: "Prompt Engineering",
-          icon: <Terminal className="w-4 h-4 text-[#10B981]" />,
-        },
+        { name: "LangChain", icon: <SiLangchain className="w-4 h-4 text-purple-400" /> },
+        { name: "Hugging Face", icon: <SiHuggingface className="w-4 h-4 text-orange-400" /> },
+        { name: "Prompt Engineering", icon: <Terminal className="w-4 h-4 text-green-400" /> },
       ],
     },
     {
@@ -135,7 +135,7 @@ const SkillsSection = () => {
       title: "Frontend (Familiar)",
       color: "text-yellow-400",
       skills: [
-        { name: "React.js", icon: <FaReact className="w-4 h-4 text-[#61DAFB]" /> },
+        { name: "React", icon: <FaReact className="w-4 h-4 text-[#61DAFB]" /> },
         { name: "HTML", icon: <FaHtml5 className="w-4 h-4 text-[#E34F26]" /> },
         { name: "CSS", icon: <FaCss3Alt className="w-4 h-4 text-[#1572B6]" /> },
         { name: "Bootstrap", icon: <FaBootstrap className="w-4 h-4 text-[#7952B3]" /> },
@@ -148,60 +148,36 @@ const SkillsSection = () => {
       skills: [
         { name: "Git", icon: <FaGitAlt className="w-4 h-4 text-[#F05032]" /> },
         { name: "GitHub", icon: <SiGithub className="w-4 h-4 text-white" /> },
-        { name: "Postman", icon: <SiPostman className="w-4 h-4 text-[#FF6C37]" /> },
         { name: "Docker", icon: <FaDocker className="w-4 h-4 text-[#2496ED]" /> },
+        { name: "Postman", icon: <SiPostman className="w-4 h-4 text-[#FF6C37]" /> },
       ],
     },
   ];
 
   return (
-    <main className="pt-15 lg:pt-0 text-white min-h-screen bg-[#04081A] relative">
-      {/* Grid Background */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-20 pointer-events-none"></div>
+    <section className="min-h-screen bg-[#04081A] relative overflow-hidden py-28">
+      {/* background glow */}
+      <div className="absolute top-20 left-20 w-96 h-96 bg-cyan-500/10 blur-3xl rounded-full" />
+      <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/10 blur-3xl rounded-full" />
 
-      <section className="container mx-auto px-4 py-11 relative z-10">
-        <div className="flex justify-center items-center ">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="flex justify-center mb-20">
           <IconCloudDemo />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skillCategories.map((category, index) => (
-            <SkillCard
-              key={index}
-              icon={category.icon}
-              title={category.title}
-              skills={category.skills}
-              color={category.color}
-            />
+
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
+        >
+          {skillCategories.map((category, i) => (
+            <SkillCard key={i} {...category} />
           ))}
-        </div>
-      </section>
-      <style jsx>{`
-        @keyframes shimmer {
-          0% {
-            transform: translateX(-100%);
-          }
-          100% {
-            transform: translateX(100%);
-          }
-        }
-        .animate-shimmer {
-          animation: shimmer 2s infinite;
-        }
-        .bg-grid-pattern {
-          background-image: linear-gradient(
-              to right,
-              rgba(100, 100, 255, 0.1) 1px,
-              transparent 1px
-            ),
-            linear-gradient(
-              to bottom,
-              rgba(100, 100, 255, 0.1) 1px,
-              transparent 1px
-            );
-          background-size: 30px 30px;
-        }
-      `}</style>
-    </main>
+        </motion.div>
+      </div>
+    </section>
   );
 };
 
