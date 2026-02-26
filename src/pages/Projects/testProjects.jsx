@@ -80,6 +80,7 @@ const projects = [
 
 export default function Projects() {
   const container = useRef(null);
+  const indicatorVisibleRef = useRef(true);
   const { scrollYProgress } = useScroll({
     target: container,
     offset: ["start start", "end end"],
@@ -90,7 +91,11 @@ export default function Projects() {
 
   useEffect(() => {
     return scrollYProgress.on("change", (latest) => {
-      setShowIndicator(latest < 0.95);
+      const next = latest < 0.95;
+      if (indicatorVisibleRef.current !== next) {
+        indicatorVisibleRef.current = next;
+        setShowIndicator(next);
+      }
     });
   }, [scrollYProgress]);
 
@@ -168,11 +173,10 @@ export default function Projects() {
 }
 
 function DesktopCard({ i, project, progress, range, targetScale }) {
-  const container = useRef(null);
   const scale = useTransform(progress, range, [1, targetScale]);
 
   return (
-    <div ref={container} className="h-[86vh] sticky top-20 flex items-center justify-center">
+    <div className="h-[86vh] sticky top-20 flex items-center justify-center">
       <motion.div
         style={{ scale }}
         className="w-[88%] lg:w-[75%] xl:w-[65%]"

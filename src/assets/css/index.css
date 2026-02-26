@@ -6,6 +6,11 @@ html {
   scroll-behavior: smooth;
 }
 
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 900px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -39,6 +44,16 @@ html {
   }
   100% {
     background-position: 0% 50%;
+  }
+}
+
+@keyframes gridPulse {
+  0%,
+  100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.3;
   }
 }
 
@@ -224,6 +239,7 @@ pre[class*="language-"] {
   }
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
   }
 }
 /* Add these classes to adjust the grid colors in the top-left and bottom-right */

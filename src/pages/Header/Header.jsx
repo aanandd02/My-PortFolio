@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   FaHome,
   FaLaptopCode,
@@ -6,65 +6,48 @@ import {
   FaGraduationCap,
   FaCode,
   FaEnvelope,
-  FaFileAlt,
   FaBars,
   FaTimes,
 } from "react-icons/fa";
 
+const NAV_LINKS = [
+  { id: "home", icon: FaHome, text: "Home", href: "#home" },
+  { id: "skills", icon: FaCode, text: "Skills", href: "#skills" },
+  { id: "experience", icon: FaBriefcase, text: "Experience", href: "#experience" },
+  { id: "education", icon: FaGraduationCap, text: "Education", href: "#education" },
+  { id: "projects", icon: FaLaptopCode, text: "Projects", href: "#projects" },
+  { id: "contact", icon: FaEnvelope, text: "Contact", href: "#contact" },
+];
+
 export default function Header() {
   const [activeLink, setActiveLink] = useState("home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const navLinks = [
-    { id: "home", icon: FaHome, text: "Home", href: "#home" },
-    { id: "skills", icon: FaCode, text: "Skills", href: "#skills" },
-    { id: "experience", icon: FaBriefcase, text: "Experience", href: "#experience" },
-    { id: "education", icon: FaGraduationCap, text: "Education", href: "#education" },
-    { id: "projects", icon: FaLaptopCode, text: "Projects", href: "#projects" },
-    { id: "contact", icon: FaEnvelope, text: "Contact", href: "#contact" },
-  ];
   useEffect(() => {
-    const hash = window.location.hash?.replace("#", "");
-    if (hash) {
-      setActiveLink(hash);
-    }
-    let rafId = null;
-    const offset = 140;
+    setActiveLink("home");
+    const sections = NAV_LINKS
+      .map(({ id }) => document.getElementById(id))
+      .filter(Boolean);
 
-    const updateActiveSection = () => {
-      let current = "home";
+    if (!sections.length) return undefined;
 
-      for (const { id } of navLinks) {
-        const section = document.getElementById(id);
-        if (!section) continue;
-
-        const top = section.offsetTop;
-        const bottom = top + section.offsetHeight;
-        if (window.scrollY + offset >= top && window.scrollY + offset < bottom) {
-          current = id;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible[0]?.target?.id) {
+          setActiveLink(visible[0].target.id);
         }
+      },
+      {
+        root: null,
+        rootMargin: "-35% 0px -45% 0px",
+        threshold: [0.2, 0.4, 0.6],
       }
+    );
 
-      setActiveLink(current);
-      rafId = null;
-    };
-
-    const onScroll = () => {
-      if (rafId !== null) return;
-      rafId = window.requestAnimationFrame(updateActiveSection);
-    };
-
-    updateActiveSection();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-
-    return () => {
-      if (rafId !== null) {
-        window.cancelAnimationFrame(rafId);
-      }
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -97,13 +80,7 @@ export default function Header() {
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
-      window.history.replaceState(null, "", href);
     }
-  };
-
-  const openResumeVault = () => {
-    setIsMobileMenuOpen(false);
-    window.dispatchEvent(new Event("open-resume-admin"));
   };
 
   return (
@@ -130,7 +107,7 @@ export default function Header() {
             </div>
 
             <div className="hidden lg:flex items-center justify-between gap-1.5 w-full">
-              {navLinks.map(({ id, icon: Icon, text, href }) => (
+              {NAV_LINKS.map(({ id, icon: Icon, text, href }) => (
                 <a
                   key={id}
                   href={href}
@@ -157,14 +134,6 @@ export default function Header() {
                   </span>
                 </a>
               ))}
-              <button
-                type="button"
-                onClick={openResumeVault}
-                className="shrink-0 flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-300/30 bg-cyan-300/14 text-cyan-100 text-sm font-semibold transition-all duration-300 hover:bg-cyan-300/24 whitespace-nowrap"
-              >
-                <FaFileAlt className="text-sm" />
-                <span>Resume Vault</span>
-              </button>
             </div>
 
             <div
@@ -173,7 +142,7 @@ export default function Header() {
               }`}
             >
               <div className="grid grid-cols-2 md:grid-cols-3 gap-2 pb-1">
-                {navLinks.map(({ id, icon: Icon, text, href }) => (
+                {NAV_LINKS.map(({ id, icon: Icon, text, href }) => (
                   <a
                     key={id}
                     href={href}
@@ -188,14 +157,6 @@ export default function Header() {
                     <span>{text}</span>
                   </a>
                 ))}
-                <button
-                  type="button"
-                  onClick={openResumeVault}
-                  className="col-span-2 md:col-span-3 flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-sm border border-cyan-300/30 bg-cyan-300/15 text-cyan-100 transition-all duration-300"
-                >
-                  <FaFileAlt className="text-sm" />
-                  <span>Open Resume Vault</span>
-                </button>
               </div>
             </div>
           </nav>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Prism from "prismjs";
 import "prismjs/components/prism-javascript";
 import "@/assets/css/tomorrow.css";
@@ -43,7 +43,7 @@ const GridBackground = () => {
 
 export default function Hero() {
   const words = ["Learner", "Engineer", "Developer", "Problem-Solver"];
-  const [meteorCount, setMeteorCount] = useState(10);
+  const [meteorCount, setMeteorCount] = useState(6);
   const [resumeUrl, setResumeUrl] = useState(() => getPublicResumeUrl());
 
   // Code block with Anand
@@ -73,29 +73,29 @@ const profile = {
 
   useEffect(() => {
     Prism.highlightAll();
-
-    // Add CSS animation for grid and dots
-    const style = document.createElement("style");
-    style.textContent = `
-      @keyframes gridPulse {
-        0%, 100% { opacity: 0.1; }
-        50% { opacity: 0.3; }
-      }
-      
-      @keyframes dotPulse {
-        0%, 100% { opacity: 0.2; transform: scale(0.8); }
-        50% { opacity: 0.5; transform: scale(1.2); }
-      }
-    `;
-    document.head.appendChild(style);
-
-    return () => {
-      document.head.removeChild(style);
-    };
   }, [code]);
 
   useEffect(() => {
-    setMeteorCount(window.innerWidth < 768 ? 4 : 10);
+    const mediaMobile = window.matchMedia("(max-width: 767px)");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    const update = () => {
+      if (reducedMotion.matches) {
+        setMeteorCount(0);
+      } else if (mediaMobile.matches) {
+        setMeteorCount(3);
+      } else {
+        setMeteorCount(6);
+      }
+    };
+
+    update();
+    mediaMobile.addEventListener("change", update);
+    reducedMotion.addEventListener("change", update);
+    return () => {
+      mediaMobile.removeEventListener("change", update);
+      reducedMotion.removeEventListener("change", update);
+    };
   }, []);
 
   useEffect(() => {
@@ -106,10 +106,10 @@ const profile = {
 
   return (
     <>
-      <main className="pt-24 md:pt-24 bg-[#020617] text-white min-h-screen">
+      <main className="pt-20 md:pt-20 bg-[#020617] text-white min-h-screen">
         <section
           id="home"
-          className="hero min-h-screen scroll-mt-28 flex items-center relative px-4 sm:px-6 lg:px-8"
+          className="hero min-h-[calc(100vh-5rem)] scroll-mt-28 flex items-center relative px-4 sm:px-6 lg:px-8"
         >
           <div className="absolute inset-0"></div>
 
