@@ -42,6 +42,7 @@ const GridBackground = () => {
 
 export default function Hero() {
   const words = ["Learner", "Engineer", "Developer", "Problem-Solver"];
+  const [meteorCount, setMeteorCount] = useState(10);
 
   // Code block with Anand
   const [code] = useState(`
@@ -91,17 +92,24 @@ const profile = {
     };
   }, [code]);
 
+  useEffect(() => {
+    setMeteorCount(window.innerWidth < 768 ? 4 : 10);
+  }, []);
+
   return (
     <>
       <main className="pt-20 lg:pt-[0rem] bg-[#020617] text-white min-h-screen">
-        <section className="hero min-h-screen flex items-center relative px-4 sm:px-6 lg:px-8">
+        <section
+          id="home"
+          className="hero min-h-screen scroll-mt-28 flex items-center relative px-4 sm:px-6 lg:px-8"
+        >
           <div className="absolute inset-0"></div>
 
           <GridBackground />
 
           {/* Meteors Effect */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <Meteors number={10} />
+            <Meteors number={meteorCount} />
           </div>
 
           <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between relative z-10 py-12 lg:py-0">

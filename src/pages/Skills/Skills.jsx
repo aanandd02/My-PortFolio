@@ -1,13 +1,11 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import IconCloudDemo from "@/components/globe";
 import {
   Code2,
   Database,
   Layout,
-  Cpu,
   Cloud,
   Brain,
   Terminal,
@@ -24,7 +22,6 @@ import {
 } from "react-icons/fa";
 import {
   SiJavascript,
-  SiMongodb,
   SiExpress,
   SiPostman,
   SiGithub,
@@ -35,6 +32,9 @@ import {
   SiPython,
   SiFastapi,
 } from "react-icons/si";
+import LazySection from "@/components/LazySection";
+
+const IconCloudDemo = lazy(() => import("@/components/globe"));
 
 /* ---------- animations ---------- */
 const container = {
@@ -155,14 +155,20 @@ const SkillsSection = () => {
   ];
 
   return (
-    <section className="min-h-screen bg-[#04081A] relative overflow-hidden py-28">
+    <section
+      className="min-h-screen bg-[#04081A] relative overflow-hidden py-28"
+    >
       {/* background glow */}
       <div className="absolute top-20 left-20 w-96 h-96 bg-cyan-500/10 blur-3xl rounded-full" />
       <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/10 blur-3xl rounded-full" />
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="flex justify-center mb-20">
-          <IconCloudDemo />
+        <div className="flex justify-center mb-20 min-h-[280px]">
+          <LazySection minHeight="280px" rootMargin="150px 0px">
+            <Suspense fallback={<div className="text-cyan-300/70 text-sm">Loading tech cloud...</div>}>
+              <IconCloudDemo />
+            </Suspense>
+          </LazySection>
         </div>
 
         <motion.div

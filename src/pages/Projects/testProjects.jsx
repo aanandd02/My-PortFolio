@@ -1,13 +1,12 @@
 "use client";
-import { ReactLenis } from "lenis/react";
 import { useTransform, motion, useScroll } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
 
 import codeSavantImg from "../../assets/images/CodeSavant-AI.png";
 import reserveMateImg from "../../assets/images/Reservemate.png";
 import mealStackImg from "../../assets/images/MealStack.png";
 import hotelApiImg from "../../assets/images/Hotel Booking API.png";
-import svrImg from "../../assets/images/SVR.png"; 
+import svrImg from "../../assets/images/SVR.png";
 import mailautoImg from "../../assets/images/ai-email-automation-banner.png";
 
 const projects = [
@@ -15,14 +14,13 @@ const projects = [
     title: "AI Email Automation",
     description:
       "An AI-powered email outreach automation system using Google Gemini AI, Google Sheets API, and Gmail via Nodemailer. It automatically generates personalized backend developer job/internship emails, attaches resume, and updates status in Google Sheet.",
-    src: mailautoImg, 
+    src: mailautoImg,
     color: "#8a2be2",
     githubLink: "https://github.com/aanandd02/Ai-emails-automation",
     liveLink: "",
     tech: "Node.js, Express.js, Gemini AI, Google Sheets API, Gmail, HTML, CSS",
     date: "Nov 2025",
   },
-
   {
     title: "Shree Vishwanath Roadways (SVR)",
     description:
@@ -88,6 +86,7 @@ export default function Projects() {
   });
 
   const [showIndicator, setShowIndicator] = useState(true);
+  const isMobile = useMemo(() => window.innerWidth < 768, []);
 
   useEffect(() => {
     return scrollYProgress.on("change", (latest) => {
@@ -96,64 +95,67 @@ export default function Projects() {
   }, [scrollYProgress]);
 
   return (
-    <ReactLenis root>
-      <main className="bg-black relative" ref={container}>
-        <section className="text-white w-full bg-slate-950">
-          {projects.map((project, i) => {
-            const targetScale = 1 - (projects.length - i) * 0.05;
-            return (
-              <Card
-                key={`p_${i}`}
-                i={i}
-                src={project.src}
-                title={project.title}
-                color={project.color}
-                description={project.description}
-                tech={project.tech}
-                date={project.date}
-                githubLink={project.githubLink}
-                liveLink={project.liveLink}
-                progress={scrollYProgress}
-                range={[i * 0.25, 1]}
-                targetScale={targetScale}
-              />
-            );
-          })}
-        </section>
+    <main className="bg-black relative" ref={container}>
+      <section className="text-white w-full bg-slate-950">
+        <div className="pt-16 pb-3 text-center">
+          <h2 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-cyan-300 via-blue-400 to-emerald-300 bg-clip-text text-transparent">
+            Featured Projects
+          </h2>
+        </div>
 
-        {showIndicator && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5 }}
-            className="
-              fixed bottom-5 inset-x-0
-              flex flex-col items-center justify-center
-              text-white text-sm z-[9999]
-              pointer-events-none select-none
-            "
+        {projects.map((project, i) => {
+          const targetScale = 1 - (projects.length - i) * (isMobile ? 0 : 0.05);
+          return (
+            <Card
+              key={`p_${i}`}
+              i={i}
+              src={project.src}
+              title={project.title}
+              color={project.color}
+              description={project.description}
+              tech={project.tech}
+              date={project.date}
+              githubLink={project.githubLink}
+              liveLink={project.liveLink}
+              progress={scrollYProgress}
+              range={[i * 0.25, 1]}
+              targetScale={targetScale}
+              isMobile={isMobile}
+            />
+          );
+        })}
+      </section>
+
+      {showIndicator && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5 }}
+          className="
+            fixed bottom-5 inset-x-0
+            flex flex-col items-center justify-center
+            text-white text-sm z-[9999]
+            pointer-events-none select-none
+          "
+        >
+          <span className="mb-1 text-xs sm:text-sm opacity-80">Scroll Down</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="22"
+            height="22"
+            fill="none"
+            stroke="white"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="animate-bounce"
           >
-            <span className="mb-1 text-xs sm:text-sm opacity-80">
-              Scroll Down
-            </span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="22"
-              height="22"
-              fill="none"
-              stroke="white"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="animate-bounce"
-            >
-              <line x1="12" y1="5" x2="12" y2="19" />
-              <polyline points="19,12 12,19 5,12" />
-            </svg>
-          </motion.div>
-        )}
-      </main>
-    </ReactLenis>
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <polyline points="19,12 12,19 5,12" />
+          </svg>
+        </motion.div>
+      )}
+    </main>
   );
 }
 
@@ -170,33 +172,27 @@ function Card({
   progress,
   range,
   targetScale,
+  isMobile,
 }) {
   const container = useRef(null);
-  const [isHovered, setIsHovered] = useState(false);
-  const { scrollYProgress } = useScroll({
-    target: container,
-    offset: ["start end", "start start"],
-  });
-
   const scale = useTransform(progress, range, [1, targetScale]);
 
   return (
     <div
       ref={container}
-      className="h-screen flex items-center justify-center sticky top-0"
+      className={`flex items-center justify-center ${
+        isMobile ? "relative py-10" : "h-screen sticky top-0"
+      }`}
     >
       <motion.div
         style={{
-          scale,
-          top: `calc(-5vh + ${i * 25}px)`,
+          scale: isMobile ? 1 : scale,
+          top: isMobile ? "0px" : `calc(-5vh + ${i * 25}px)`,
         }}
-        className="relative -top-[25%] h-auto w-[90%] md:w-[85%] lg:w-[75%] xl:w-[65%] origin-top"
-        whileHover={{
-          y: -8,
-          transition: { duration: 0.3 },
-        }}
-        onHoverStart={() => setIsHovered(true)}
-        onHoverEnd={() => setIsHovered(false)}
+        className={`relative h-auto w-[90%] md:w-[85%] lg:w-[75%] xl:w-[65%] origin-top ${
+          isMobile ? "top-0" : "-top-[25%]"
+        }`}
+        whileHover={{ y: -8, transition: { duration: 0.3 } }}
       >
         <div className="w-full flex flex-col md:flex-row bg-zinc-900 rounded-2xl overflow-hidden shadow-xl">
           <div className="w-full md:w-[50%] h-[220px] md:h-[380px] lg:h-[420px] relative overflow-hidden bg-gray-800 flex items-center justify-center text-gray-400 text-sm">
@@ -204,6 +200,8 @@ function Card({
               <img
                 src={src}
                 alt={title}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover opacity-80"
               />
             ) : (
@@ -229,9 +227,7 @@ function Card({
               <p className="text-sm md:text-base text-gray-400 leading-relaxed mb-2">
                 {description}
               </p>
-              <p className="text-xs md:text-sm text-gray-500 italic mb-2">
-                {tech}
-              </p>
+              <p className="text-xs md:text-sm text-gray-500 italic mb-2">{tech}</p>
               <p className="text-xs text-gray-500">{date}</p>
             </div>
 
@@ -282,7 +278,7 @@ function GitHubIcon({ color }) {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
     </svg>
   );
 }
@@ -300,9 +296,9 @@ function LiveIcon({ color }) {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <circle cx="12" cy="12" r="10"></circle>
-      <line x1="2" y1="12" x2="22" y2="12"></line>
-      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+      <circle cx="12" cy="12" r="10" />
+      <line x1="2" y1="12" x2="22" y2="12" />
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
     </svg>
   );
 }

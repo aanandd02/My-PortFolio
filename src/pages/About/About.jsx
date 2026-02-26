@@ -18,6 +18,8 @@ export default function About() {
                 alt="Portfolio Hero"
                 width={1207}
                 height={929}
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>

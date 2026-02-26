@@ -1,42 +1,65 @@
-import React, { useState } from "react";
+import { Suspense, lazy } from "react";
 import "./assets/css/index.css";
-import Experience from "./pages/Experience/Experience";
-import Contact from "./pages/Contact/Contact";
-import Projects from "./pages/Projects/Projects";
 import Header from "./pages/Header/Header";
 import Hero from "./pages/Hero/Hero";
-import Skills from "./pages/Skills/Skills";
-import Education from "./pages/Education/Education";
+import LazySection from "./components/LazySection";
+import BackToTop from "./components/BackToTop";
 
-import { Route, Routes } from "react-router-dom";
+const Skills = lazy(() => import("./pages/Skills/Skills"));
+const Experience = lazy(() => import("./pages/Experience/Experience"));
+const Education = lazy(() => import("./pages/Education/Education"));
+const Projects = lazy(() => import("./pages/Projects/Projects"));
+const Contact = lazy(() => import("./pages/Contact/Contact"));
 
 export default function App() {
-  const [isOnePage, setIsOnePage] = useState(false); // Toggle state
-
   return (
     <>
       <Header />
-      {/* Conditional Rendering */}
-      {isOnePage ? (
-        // One-Page Mode: Render all components together
-        <>
-          <Hero />
-          <Skills />
-          <Experience />
-          <Education />
-          <Contact />
-        </>
-      ) : (
-        // Router Mode: Use routes for navigation
-        <Routes>`
-          <Route path="/" element={<Hero />} />
-          <Route path="/skills" element={<Skills />} />
-          <Route path="/experience" element={<Experience />} />
-          <Route path="/education" element={<Education />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/projects" element={<Projects />} />
-        </Routes>
-      )}
+      <Hero />
+      <div id="skills" className="section-transition scroll-mt-28 content-shell">
+        <LazySection minHeight="100vh">
+          <Suspense fallback={<SectionFallback label="Loading skills..." />}>
+            <Skills />
+          </Suspense>
+        </LazySection>
+      </div>
+      <div id="experience" className="section-transition scroll-mt-28 content-shell">
+        <LazySection minHeight="100vh">
+          <Suspense fallback={<SectionFallback label="Loading experience..." />}>
+            <Experience />
+          </Suspense>
+        </LazySection>
+      </div>
+      <div id="education" className="section-transition scroll-mt-28 content-shell">
+        <LazySection minHeight="100vh">
+          <Suspense fallback={<SectionFallback label="Loading education..." />}>
+            <Education />
+          </Suspense>
+        </LazySection>
+      </div>
+      <div id="projects" className="section-transition scroll-mt-28 content-shell">
+        <LazySection minHeight="100vh">
+          <Suspense fallback={<SectionFallback label="Loading projects..." />}>
+            <Projects />
+          </Suspense>
+        </LazySection>
+      </div>
+      <div id="contact" className="section-transition scroll-mt-28 content-shell">
+        <LazySection minHeight="90vh">
+          <Suspense fallback={<SectionFallback label="Loading contact..." />}>
+            <Contact />
+          </Suspense>
+        </LazySection>
+      </div>
+      <BackToTop />
     </>
+  );
+}
+
+function SectionFallback({ label }) {
+  return (
+    <div className="min-h-[55vh] grid place-items-center text-cyan-300/80 text-sm tracking-wide">
+      {label}
+    </div>
   );
 }

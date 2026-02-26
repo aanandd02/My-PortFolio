@@ -88,7 +88,9 @@ const EducationSection = () => {
   ];
 
   return (
-    <section className="min-h-screen bg-[#04081A] py-32 relative overflow-hidden">
+    <section
+      className="min-h-screen bg-[#04081A] py-32 relative overflow-hidden"
+    >
       {/* background glow */}
       <div className="absolute top-20 left-20 w-96 h-96 bg-cyan-500/10 blur-3xl rounded-full" />
       <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/10 blur-3xl rounded-full" />
