@@ -6,39 +6,6 @@ html {
   scroll-behavior: smooth;
 }
 
-.section-transition {
-  position: relative;
-}
-
-.content-shell {
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 1000px;
-}
-
-.section-transition::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 8%;
-  right: 8%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(94, 234, 212, 0.65), transparent);
-  z-index: 15;
-  pointer-events: none;
-}
-
-.section-transition::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 120px;
-  background: linear-gradient(180deg, rgba(2, 6, 23, 0.5), transparent);
-  z-index: 10;
-  pointer-events: none;
-}
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

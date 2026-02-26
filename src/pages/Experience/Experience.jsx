@@ -67,19 +67,19 @@ const ExperienceSection = () => {
   const experiences = [
     {
       icon: Server,
-      title: "Backend Intern",
+      title: "Backend Engineer Intern",
       company: "Synup",
       period: "Jan 2026 – Present",
       description:
-        "Developing scalable backend services using Node.js and databases, building APIs, improving reliability, and collaborating with cross-functional teams.",
+        "Working on serverless microservices using AWS Lambda, MySQL, Elasticsearch, and S3 in an event-driven fan-out system. Resolved a critical race condition in Prospect-Up pipeline with consistent MySQL transactional updates across concurrent services, and built a quarterly Outscraper-powered ingestion pipeline for optimized search and reliable profile generation.",
     },
     {
       icon: Code2,
-      title: "Full Stack Developer Intern",
+      title: "Backend Developer Intern",
       company: "BrandX",
       period: "Oct 2024 – Jan 2025",
       description:
-        "Built a MERN stack application with optimized APIs, improved performance, and delivered production-ready features.",
+        "Developed scalable backend APIs for booking, authentication, and admin dashboards in the Kumbh Mela 2024 Cottage Booking System (50K+ users). Optimized MongoDB queries, payment workflows, and API response performance, reducing latency by 40% under 10K+ concurrent requests.",
     },
     {
       icon: Layers,
@@ -93,20 +93,20 @@ const ExperienceSection = () => {
 
   return (
     <section
-      className="min-h-screen bg-[#04081A] pt-32 pb-24 relative overflow-hidden"
+      className="bg-[#04081A] pt-6 md:pt-8 pb-12 md:pb-16 relative overflow-hidden"
     >
       {/* Background glow */}
       <div className="absolute top-20 left-20 w-96 h-96 bg-cyan-500/10 blur-3xl rounded-full" />
       <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/10 blur-3xl rounded-full" />
 
-      <div className="relative container mx-auto px-6">
+      <div className="relative container mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-8 md:mb-12"
         >
           <h2 className="text-4xl md:text-6xl font-bold text-transparent bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text">
             Experience
@@ -117,7 +117,7 @@ const ExperienceSection = () => {
         </motion.div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 max-w-6xl mx-auto">
           {experiences.map((exp, index) => (
             <ExperienceCard key={index} {...exp} index={index} />
           ))}

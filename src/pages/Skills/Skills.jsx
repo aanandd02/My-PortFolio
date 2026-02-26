@@ -9,6 +9,14 @@ import {
   Cloud,
   Brain,
   Terminal,
+  ShieldCheck,
+  Boxes,
+  Workflow,
+  Search,
+  ServerCog,
+  Activity,
+  Network,
+  Binary,
 } from "lucide-react";
 import {
   FaJava,
@@ -29,8 +37,7 @@ import {
   SiHuggingface,
   SiC,
   SiMysql,
-  SiPython,
-  SiFastapi,
+  SiMongodb,
 } from "react-icons/si";
 import LazySection from "@/components/LazySection";
 
@@ -60,9 +67,9 @@ const SkillCard = ({ icon: Icon, title, skills, color }) => (
       <div className="absolute -inset-[1.5px] bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 rounded-xl opacity-0 group-hover:opacity-100 blur-sm transition duration-500" />
 
       <Card className="relative bg-gray-900/80 backdrop-blur-xl border border-white/10 rounded-xl">
-        <CardContent className="p-6">
+        <CardContent className="p-4 sm:p-5 md:p-6">
           {/* header */}
-          <div className="flex items-center gap-4 mb-6">
+          <div className="flex items-center gap-3 mb-4">
             <motion.div
               animate={{ y: [0, -5, 0] }}
               transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
@@ -70,7 +77,7 @@ const SkillCard = ({ icon: Icon, title, skills, color }) => (
             >
               <Icon className="w-7 h-7" />
             </motion.div>
-            <h3 className="text-xl font-semibold text-white tracking-wide">
+            <h3 className="text-lg sm:text-xl font-semibold text-white tracking-wide">
               {title}
             </h3>
           </div>
@@ -103,7 +110,6 @@ const SkillsSection = () => {
       skills: [
         { name: "C", icon: <SiC className="w-4 h-4 text-[#A8B9CC]" /> },
         { name: "Java", icon: <FaJava className="w-4 h-4 text-[#E11F21]" /> },
-        { name: "Python", icon: <SiPython className="w-4 h-4 text-[#3776AB]" /> },
         { name: "JavaScript", icon: <SiJavascript className="w-4 h-4 text-[#F7DF1E]" /> },
         { name: "SQL", icon: <SiMysql className="w-4 h-4 text-[#00618A]" /> },
       ],
@@ -115,9 +121,35 @@ const SkillsSection = () => {
       skills: [
         { name: "Node.js", icon: <FaNodeJs className="w-4 h-4 text-[#339933]" /> },
         { name: "Express.js", icon: <SiExpress className="w-4 h-4 text-white" /> },
-        { name: "FastAPI", icon: <SiFastapi className="w-4 h-4 text-[#009688]" /> },
-        { name: "REST APIs", icon: <Terminal className="w-4 h-4 text-orange-400" /> },
-        { name: "JWT Auth", icon: <Terminal className="w-4 h-4 text-yellow-400" /> },
+        { name: "REST APIs", icon: <ServerCog className="w-4 h-4 text-orange-400" /> },
+        { name: "JWT Auth", icon: <ShieldCheck className="w-4 h-4 text-yellow-400" /> },
+        { name: "Microservices", icon: <Boxes className="w-4 h-4 text-cyan-400" /> },
+        { name: "System Design", icon: <Binary className="w-4 h-4 text-blue-300" /> },
+      ],
+    },
+    {
+      icon: Database,
+      title: "Databases & Search",
+      color: "text-teal-400",
+      skills: [
+        { name: "MySQL", icon: <SiMysql className="w-4 h-4 text-[#00618A]" /> },
+        { name: "MongoDB", icon: <SiMongodb className="w-4 h-4 text-[#47A248]" /> },
+        { name: "Elasticsearch", icon: <Search className="w-4 h-4 text-yellow-300" /> },
+      ],
+    },
+    {
+      icon: Cloud,
+      title: "Cloud & Distributed",
+      color: "text-cyan-300",
+      skills: [
+        { name: "AWS", icon: <Cloud className="w-4 h-4 text-[#FF9900]" /> },
+        { name: "Lambda", icon: <Activity className="w-4 h-4 text-orange-300" /> },
+        { name: "EC2 / S3", icon: <Database className="w-4 h-4 text-amber-300" /> },
+        { name: "API Gateway", icon: <Network className="w-4 h-4 text-blue-300" /> },
+        { name: "SQS / SNS", icon: <Workflow className="w-4 h-4 text-lime-300" /> },
+        { name: "CloudWatch", icon: <Search className="w-4 h-4 text-sky-300" /> },
+        { name: "Serverless", icon: <Cloud className="w-4 h-4 text-emerald-300" /> },
+        { name: "Event-Driven", icon: <Workflow className="w-4 h-4 text-cyan-300" /> },
       ],
     },
     {
@@ -155,20 +187,44 @@ const SkillsSection = () => {
   ];
 
   return (
-    <section
-      className="min-h-screen bg-[#04081A] relative overflow-hidden py-28"
-    >
+    <section className="bg-[#04081A] relative overflow-hidden pt-8 md:pt-12 pb-0">
       {/* background glow */}
       <div className="absolute top-20 left-20 w-96 h-96 bg-cyan-500/10 blur-3xl rounded-full" />
       <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/10 blur-3xl rounded-full" />
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="flex justify-center mb-20 min-h-[280px]">
-          <LazySection minHeight="280px" rootMargin="150px 0px">
-            <Suspense fallback={<div className="text-cyan-300/70 text-sm">Loading tech cloud...</div>}>
-              <IconCloudDemo />
-            </Suspense>
-          </LazySection>
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] items-center gap-5 md:gap-8 mb-5 md:mb-8">
+          <div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-300 via-blue-400 to-emerald-300 bg-clip-text text-transparent">
+              Skills Stack
+            </h2>
+            <p className="text-gray-300 mt-3 max-w-2xl text-sm sm:text-base">
+              Backend-focused toolkit with practical frontend and AI integration
+              skills. Built for shipping reliable products fast.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <span className="px-3 py-1 rounded-full text-xs border border-cyan-400/30 bg-cyan-400/10 text-cyan-200">
+                API Development
+              </span>
+              <span className="px-3 py-1 rounded-full text-xs border border-blue-400/30 bg-blue-400/10 text-blue-200">
+                Full-Stack Builds
+              </span>
+              <span className="px-3 py-1 rounded-full text-xs border border-emerald-400/30 bg-emerald-400/10 text-emerald-200">
+                AI Integrations
+              </span>
+              <span className="px-3 py-1 rounded-full text-xs border border-violet-400/30 bg-violet-400/10 text-violet-200">
+                400+ LeetCode
+              </span>
+            </div>
+          </div>
+
+          <div className="flex justify-center lg:justify-end">
+            <LazySection minHeight="220px" rootMargin="120px 0px">
+              <Suspense fallback={<div className="text-cyan-300/70 text-sm">Loading tech cloud...</div>}>
+                <IconCloudDemo />
+              </Suspense>
+            </LazySection>
+          </div>
         </div>
 
         <motion.div
@@ -176,7 +232,7 @@ const SkillsSection = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
         >
           {skillCategories.map((category, i) => (
             <SkillCard key={i} {...category} />

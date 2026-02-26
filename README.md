@@ -18,6 +18,29 @@ This website is a reflection of my journey as a **Software Developer**, showcasi
 - **Deployment:** Render  
 - **Version Control:** Git & GitHub  
 
+## 🔐 Resume Admin (Latest Resume Auto-Update)
+This portfolio now includes a password-protected `Resume Admin` panel.
+
+How it works:
+- Admin logs in with Supabase Auth email/password.
+- Uploads a new PDF resume.
+- File is uploaded with `upsert` at one fixed path: `latest-resume.pdf`.
+- Old resume is automatically replaced (no manual delete needed).
+- Public `Resume` button always opens the latest uploaded file.
+
+Required `.env` vars:
+```env
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+VITE_SUPABASE_BUCKET=resumes
+```
+
+Supabase setup:
+1. Create a bucket named `resumes` and keep it `public`.
+2. Keep only authenticated users allowed for upload/update in Storage policies.
+3. Create admin user in Supabase Auth (email/password).
+4. Use that admin credential inside the `Resume Admin` panel in UI.
+
 ## 📬 Let’s Connect  
 - 💼 [LinkedIn](https://www.linkedin.com/in/ananadshukla05/)  
 - 🖥️ [GitHub](https://github.com/aanandd02)  

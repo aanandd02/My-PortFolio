@@ -6,6 +6,7 @@ import {
   FaGraduationCap,
   FaCode,
   FaEnvelope,
+  FaFileAlt,
   FaBars,
   FaTimes,
 } from "react-icons/fa";
@@ -13,7 +14,6 @@ import {
 export default function Header() {
   const [activeLink, setActiveLink] = useState("home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
 
   const navLinks = [
     { id: "home", icon: FaHome, text: "Home", href: "#home" },
@@ -23,54 +23,48 @@ export default function Header() {
     { id: "projects", icon: FaLaptopCode, text: "Projects", href: "#projects" },
     { id: "contact", icon: FaEnvelope, text: "Contact", href: "#contact" },
   ];
-
   useEffect(() => {
     const hash = window.location.hash?.replace("#", "");
     if (hash) {
       setActiveLink(hash);
     }
+    let rafId = null;
+    const offset = 140;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+    const updateActiveSection = () => {
+      let current = "home";
 
-        if (visible.length > 0) {
-          setActiveLink(visible[0].target.id);
+      for (const { id } of navLinks) {
+        const section = document.getElementById(id);
+        if (!section) continue;
+
+        const top = section.offsetTop;
+        const bottom = top + section.offsetHeight;
+        if (window.scrollY + offset >= top && window.scrollY + offset < bottom) {
+          current = id;
         }
-      },
-      {
-        root: null,
-        rootMargin: "-120px 0px -45% 0px",
-        threshold: [0.25, 0.5, 0.75],
       }
-    );
 
-    navLinks.forEach(({ id }) => {
-      const element = document.getElementById(id);
-      if (element) {
-        observer.observe(element);
-      }
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const totalScrollableHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
-      const progress =
-        totalScrollableHeight > 0
-          ? (window.scrollY / totalScrollableHeight) * 100
-          : 0;
-      setScrollProgress(progress);
+      setActiveLink(current);
+      rafId = null;
     };
 
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => {
+      if (rafId !== null) return;
+      rafId = window.requestAnimationFrame(updateActiveSection);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+
+    return () => {
+      if (rafId !== null) {
+        window.cancelAnimationFrame(rafId);
+      }
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -87,7 +81,7 @@ export default function Header() {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 640) {
+      if (window.innerWidth >= 1024) {
         setIsMobileMenuOpen(false);
       }
     };
@@ -107,12 +101,17 @@ export default function Header() {
     }
   };
 
+  const openResumeVault = () => {
+    setIsMobileMenuOpen(false);
+    window.dispatchEvent(new Event("open-resume-admin"));
+  };
+
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-gray-900/95 backdrop-blur-md py-3">
-      <div className="flex justify-center px-2 sm:px-6">
-        <div className="p-[2px] rounded-full bg-gradient-to-r from-emerald-400 via-cyan-500 to-indigo-500 animate-gradient-x w-full max-w-[900px]">
-          <nav className="bg-gray-900/90 backdrop-blur-md rounded-2xl sm:rounded-full px-3 sm:px-6 py-2 sm:py-2.5">
-            <div className="sm:hidden flex items-center justify-between w-full">
+    <header className="fixed top-0 left-0 w-full z-50 bg-slate-950/65 backdrop-blur-md py-2.5">
+      <div className="flex justify-center px-2 md:px-4 lg:px-6">
+        <div className="w-full max-w-[1040px] rounded-2xl lg:rounded-full p-[1px] bg-gradient-to-r from-cyan-400/45 via-blue-500/40 to-emerald-400/45 lg:from-emerald-400/95 lg:via-cyan-500/95 lg:to-indigo-500/95 lg:animate-gradient-x">
+          <nav className="bg-slate-900/95 backdrop-blur-md rounded-2xl lg:rounded-full px-3 md:px-4 lg:px-5 py-1.5 md:py-2 border border-cyan-300/20 shadow-[0_8px_24px_rgba(3,105,161,0.22)]">
+            <div className="lg:hidden flex items-center justify-between w-full">
               <a
                 href="#home"
                 onClick={(e) => handleNavClick(e, "home", "#home")}
@@ -124,25 +123,25 @@ export default function Header() {
                 type="button"
                 aria-label="Toggle menu"
                 onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-                className="w-10 h-10 rounded-full border border-white/20 bg-white/5 text-white grid place-items-center"
+                className="w-10 h-10 rounded-full border border-cyan-300/25 bg-cyan-300/10 text-cyan-100 grid place-items-center"
               >
                 {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
               </button>
             </div>
 
-            <div className="hidden sm:flex items-center justify-between gap-2 w-full">
+            <div className="hidden lg:flex items-center justify-between gap-1.5 w-full">
               {navLinks.map(({ id, icon: Icon, text, href }) => (
                 <a
                   key={id}
                   href={href}
                   onClick={(e) => handleNavClick(e, id, href)}
-                  className={`flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full
+                  className={`shrink-0 flex items-center gap-2 px-3 xl:px-4 py-1.5 rounded-full
                     font-medium
                     transition-all duration-300
                     hover:bg-white/10
                     ${
                       activeLink === id
-                        ? "bg-white/15 text-white"
+                        ? "bg-white/18 text-white"
                         : "text-gray-300 hover:text-white"
                     }
                   `}
@@ -153,27 +152,27 @@ export default function Header() {
                     }`}
                   />
                   {/* Responsive & scalable text */}
-                  <span
-                    className={`${
-                      activeLink === id ? "inline" : "hidden sm:inline"
-                    }`}
-                    style={{
-                      fontSize: "clamp(0.65rem, 1.5vw, 0.9rem)", // small on mobile, normal on larger
-                      whiteSpace: "nowrap",
-                    }}
-                  >
+                  <span className="inline whitespace-nowrap text-[0.92rem]">
                     {text}
                   </span>
                 </a>
               ))}
+              <button
+                type="button"
+                onClick={openResumeVault}
+                className="shrink-0 flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-300/30 bg-cyan-300/14 text-cyan-100 text-sm font-semibold transition-all duration-300 hover:bg-cyan-300/24 whitespace-nowrap"
+              >
+                <FaFileAlt className="text-sm" />
+                <span>Resume Vault</span>
+              </button>
             </div>
 
             <div
-              className={`sm:hidden overflow-hidden transition-all duration-300 ${
-                isMobileMenuOpen ? "max-h-96 opacity-100 mt-3" : "max-h-0 opacity-0"
+              className={`lg:hidden overflow-hidden transition-all duration-300 ${
+                isMobileMenuOpen ? "max-h-[520px] opacity-100 mt-3" : "max-h-0 opacity-0"
               }`}
             >
-              <div className="grid grid-cols-2 gap-2 pb-1">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-2 pb-1">
                 {navLinks.map(({ id, icon: Icon, text, href }) => (
                   <a
                     key={id}
@@ -181,24 +180,26 @@ export default function Header() {
                     onClick={(e) => handleNavClick(e, id, href)}
                     className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm transition-all duration-300 ${
                       activeLink === id
-                        ? "bg-white/15 text-white"
-                        : "bg-white/5 text-gray-300"
+                        ? "bg-cyan-300/20 text-cyan-100 border border-cyan-300/30"
+                        : "bg-white/5 text-gray-300 border border-white/5"
                     }`}
                   >
                     <Icon className="text-sm" />
                     <span>{text}</span>
                   </a>
                 ))}
+                <button
+                  type="button"
+                  onClick={openResumeVault}
+                  className="col-span-2 md:col-span-3 flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-sm border border-cyan-300/30 bg-cyan-300/15 text-cyan-100 transition-all duration-300"
+                >
+                  <FaFileAlt className="text-sm" />
+                  <span>Open Resume Vault</span>
+                </button>
               </div>
             </div>
           </nav>
         </div>
-      </div>
-      <div className="mt-3 h-[2px] w-full bg-white/5">
-        <div
-          className="h-full bg-gradient-to-r from-emerald-400 via-cyan-500 to-indigo-500 transition-[width] duration-200"
-          style={{ width: `${scrollProgress}%` }}
-        />
       </div>
 
       <style>{`

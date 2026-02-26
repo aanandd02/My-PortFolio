@@ -10,11 +10,11 @@ export default function About() {
 
         <div className="grid gap-6 sm:grid-cols-2 md:gap-12 lg:gap-24">
           {/* Left Side Image */}
-          <div className="relative mb-6 sm:mb-0">
+          <div className="relative mb-6 sm:mb-0 mx-auto w-full max-w-[280px] md:max-w-[330px]">
             <div className="aspect-76/59 relative rounded-2xl p-px bg-gradient-to-b from-zinc-300 to-transparent">
               <img
                 src={HeroImg}
-                className="rounded-[15px] shadow block"
+                className="rounded-[15px] shadow block w-full h-auto"
                 alt="Portfolio Hero"
                 width={1207}
                 height={929}

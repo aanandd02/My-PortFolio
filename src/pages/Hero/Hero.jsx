@@ -6,6 +6,7 @@ import Meteors from "@/components/ui/meteors";
 import PortfolioPage from "@/pages/About/About";
 import SparklesText from "@/components/ui/sparkles-text";
 import { FlipWords } from "@/components/ui/flip-words";
+import { getPublicResumeUrl } from "@/lib/resume";
 
 // Grid Background - Replacing the HexagonBackground
 const GridBackground = () => {
@@ -43,27 +44,28 @@ const GridBackground = () => {
 export default function Hero() {
   const words = ["Learner", "Engineer", "Developer", "Problem-Solver"];
   const [meteorCount, setMeteorCount] = useState(10);
+  const [resumeUrl, setResumeUrl] = useState(() => getPublicResumeUrl());
 
   // Code block with Anand
   const [code] = useState(`
 const profile = {
     name: 'Anand',
     skills: [
-        'Java', 'JavaScript', 'SQL',
-        'Node.js', 'Express.js', 'RESTful APIs',
-        'MongoDB', 
-        'Hugging Face', 'LangChain', 'Prompt Engineering',
-        'React.js',
-        'Git', 'GitHub', 'Docker'
+        'Java', 'JavaScript', 'Node.js', 'Express.js',
+        'MySQL', 'MongoDB', 'Elasticsearch',
+        'AWS', 'Microservices', 'System Design'
     ],
+    dsaProblemsSolved: 400,
+    currentRole: 'Backend Engineer Intern @ Synup',
     hardWorker: true,
-    quickLearner: true,
+    scalableThinking: true,
     problemSolver: true,
     hireable: function() {
         return (
             this.hardWorker &&
             this.problemSolver &&
-            this.skills.length >= 5 
+            this.scalableThinking &&
+            this.skills.length >= 10
         );
     }
 };
@@ -96,9 +98,15 @@ const profile = {
     setMeteorCount(window.innerWidth < 768 ? 4 : 10);
   }, []);
 
+  useEffect(() => {
+    const handleResumeUpdate = () => setResumeUrl(getPublicResumeUrl());
+    window.addEventListener("resume-updated", handleResumeUpdate);
+    return () => window.removeEventListener("resume-updated", handleResumeUpdate);
+  }, []);
+
   return (
     <>
-      <main className="pt-20 lg:pt-[0rem] bg-[#020617] text-white min-h-screen">
+      <main className="pt-24 md:pt-24 bg-[#020617] text-white min-h-screen">
         <section
           id="home"
           className="hero min-h-screen scroll-mt-28 flex items-center relative px-4 sm:px-6 lg:px-8"
@@ -170,7 +178,7 @@ const profile = {
 
                 {/* Resume Button */}
                 <a
-                  href="https://drive.google.com/file/d/1dqHj0e59CKZQNcpaXIuTdIxhZNoeIa7M/view?usp=sharing"
+                  href={resumeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative inline-flex items-center justify-center gap-3 p-0.5 rounded-xl bg-gradient-to-r from-gray-800 to-gray-700 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_2rem_-0.5rem_#60A5FA]"

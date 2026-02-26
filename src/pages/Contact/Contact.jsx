@@ -63,20 +63,20 @@ export default function Contact() {
 
   return (
     <section
-      className="min-h-screen bg-[#04081A] py-32 relative overflow-hidden"
+      className="bg-[#04081A] py-14 md:py-24 relative overflow-hidden text-white"
     >
       {/* background glow */}
       <div className="absolute top-20 left-20 w-96 h-96 bg-cyan-500/10 blur-3xl rounded-full" />
       <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/10 blur-3xl rounded-full" />
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-10 md:mb-16"
         >
           <h2 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent">
             Get in Touch
@@ -91,10 +91,10 @@ export default function Contact() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid lg:grid-cols-2 gap-16 items-center"
+          className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center"
         >
           {/* CONTACT INFO */}
-          <motion.div variants={item} className="space-y-8">
+          <motion.div variants={item} className="space-y-5 md:space-y-7">
             {[
               {
                 icon: Mail,
@@ -157,7 +157,7 @@ export default function Contact() {
             {/* glow border */}
             <div className="absolute -inset-[1.5px] bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 rounded-2xl opacity-0 group-hover:opacity-100 blur-sm transition duration-500" />
 
-            <div className="relative bg-gray-900/80 backdrop-blur-xl border border-white/10 rounded-2xl p-8">
+            <div className="relative bg-gray-900/80 backdrop-blur-xl border border-white/10 rounded-2xl p-5 sm:p-7">
               <form onSubmit={handleSubmit} className="space-y-6">
                 {["name", "email", "subject"].map((field) => (
                   <div key={field}>

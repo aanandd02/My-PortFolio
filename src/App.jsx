@@ -2,8 +2,8 @@ import { Suspense, lazy } from "react";
 import "./assets/css/index.css";
 import Header from "./pages/Header/Header";
 import Hero from "./pages/Hero/Hero";
-import LazySection from "./components/LazySection";
 import BackToTop from "./components/BackToTop";
+import ResumeAdmin from "./components/ResumeAdmin";
 
 const Skills = lazy(() => import("./pages/Skills/Skills"));
 const Experience = lazy(() => import("./pages/Experience/Experience"));
@@ -16,42 +16,33 @@ export default function App() {
     <>
       <Header />
       <Hero />
-      <div id="skills" className="section-transition scroll-mt-28 content-shell">
-        <LazySection minHeight="100vh">
-          <Suspense fallback={<SectionFallback label="Loading skills..." />}>
-            <Skills />
-          </Suspense>
-        </LazySection>
+      <div id="skills" className="scroll-mt-28">
+        <Suspense fallback={<SectionFallback label="Loading skills..." />}>
+          <Skills />
+        </Suspense>
       </div>
-      <div id="experience" className="section-transition scroll-mt-28 content-shell">
-        <LazySection minHeight="100vh">
-          <Suspense fallback={<SectionFallback label="Loading experience..." />}>
-            <Experience />
-          </Suspense>
-        </LazySection>
+      <div id="experience" className="scroll-mt-28">
+        <Suspense fallback={<SectionFallback label="Loading experience..." />}>
+          <Experience />
+        </Suspense>
       </div>
-      <div id="education" className="section-transition scroll-mt-28 content-shell">
-        <LazySection minHeight="100vh">
-          <Suspense fallback={<SectionFallback label="Loading education..." />}>
-            <Education />
-          </Suspense>
-        </LazySection>
+      <div id="education" className="scroll-mt-28">
+        <Suspense fallback={<SectionFallback label="Loading education..." />}>
+          <Education />
+        </Suspense>
       </div>
-      <div id="projects" className="section-transition scroll-mt-28 content-shell">
-        <LazySection minHeight="100vh">
-          <Suspense fallback={<SectionFallback label="Loading projects..." />}>
-            <Projects />
-          </Suspense>
-        </LazySection>
+      <div id="projects" className="scroll-mt-28">
+        <Suspense fallback={<SectionFallback label="Loading projects..." />}>
+          <Projects />
+        </Suspense>
       </div>
-      <div id="contact" className="section-transition scroll-mt-28 content-shell">
-        <LazySection minHeight="90vh">
-          <Suspense fallback={<SectionFallback label="Loading contact..." />}>
-            <Contact />
-          </Suspense>
-        </LazySection>
+      <div id="contact" className="scroll-mt-28">
+        <Suspense fallback={<SectionFallback label="Loading contact..." />}>
+          <Contact />
+        </Suspense>
       </div>
       <BackToTop />
+      <ResumeAdmin />
     </>
   );
 }

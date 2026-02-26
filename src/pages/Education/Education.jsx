@@ -89,20 +89,20 @@ const EducationSection = () => {
 
   return (
     <section
-      className="min-h-screen bg-[#04081A] py-32 relative overflow-hidden"
+      className="bg-[#04081A] py-14 md:py-24 relative overflow-hidden"
     >
       {/* background glow */}
       <div className="absolute top-20 left-20 w-96 h-96 bg-cyan-500/10 blur-3xl rounded-full" />
       <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/10 blur-3xl rounded-full" />
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* title */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-10 md:mb-16"
         >
           <h2 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent">
             Education
@@ -118,7 +118,7 @@ const EducationSection = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto"
+          className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 max-w-6xl mx-auto"
         >
           {educationData.map((edu, i) => (
             <EducationCard key={i} {...edu} />
