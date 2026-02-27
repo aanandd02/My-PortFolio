@@ -187,7 +187,7 @@ const SkillsSection = () => {
   ];
 
   return (
-    <section className="bg-[#04081A] relative overflow-hidden pt-8 md:pt-12 pb-0">
+    <section className="bg-transparent relative overflow-hidden pt-8 md:pt-12 pb-0">
       {/* background glow */}
       <div className="absolute top-20 left-20 w-96 h-96 bg-cyan-500/10 blur-3xl rounded-full" />
       <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/10 blur-3xl rounded-full" />

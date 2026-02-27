@@ -6,6 +6,17 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+  background: #020617;
+  color: #ffffff;
+  min-height: 100%;
+  background-attachment: fixed;
+}
+
+#root {
+  min-height: 100%;
+}
+
 .cv-auto {
   content-visibility: auto;
   contain-intrinsic-size: 900px;

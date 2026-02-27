@@ -92,7 +92,7 @@ const ExperienceSection = () => {
 
   return (
     <section
-      className="bg-[#04081A] pt-6 md:pt-8 pb-12 md:pb-16 relative overflow-hidden"
+      className="bg-transparent pt-6 md:pt-8 pb-12 md:pb-16 relative overflow-hidden"
     >
       {/* Background glow */}
       <div className="absolute top-20 left-20 w-96 h-96 bg-cyan-500/10 blur-3xl rounded-full" />

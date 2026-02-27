@@ -108,8 +108,8 @@ export default function Projects() {
   }, []);
 
   return (
-    <main className="bg-black relative" ref={container}>
-      <section className="text-white w-full bg-slate-950 pb-10 md:pb-16">
+    <main className="relative" ref={container}>
+      <section className="text-white w-full pb-10 md:pb-16">
         <div className="pt-10 md:pt-14 pb-4 text-center px-4">
           <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold bg-gradient-to-r from-cyan-300 via-blue-400 to-emerald-300 bg-clip-text text-transparent">
             Featured Projects

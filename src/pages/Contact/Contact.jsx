@@ -63,7 +63,7 @@ export default function Contact() {
 
   return (
     <section
-      className="bg-[#04081A] py-14 md:py-24 relative overflow-hidden text-white"
+      className="bg-transparent py-14 md:py-24 relative overflow-hidden text-white"
     >
       {/* background glow */}
       <div className="absolute top-20 left-20 w-96 h-96 bg-cyan-500/10 blur-3xl rounded-full" />

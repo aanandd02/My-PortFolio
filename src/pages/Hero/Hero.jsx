@@ -2,48 +2,13 @@ import { useState, useEffect } from "react";
 import Prism from "prismjs";
 import "prismjs/components/prism-javascript";
 import "@/assets/css/tomorrow.css";
-import Meteors from "@/components/ui/meteors";
 import PortfolioPage from "@/pages/About/About";
 import SparklesText from "@/components/ui/sparkles-text";
 import { FlipWords } from "@/components/ui/flip-words";
 import { getPublicResumeUrl } from "@/lib/resume";
 
-// Grid Background - Replacing the HexagonBackground
-const GridBackground = () => {
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-      <div className="absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,transparent_0%,black)]">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="100%"
-          height="100%"
-          className="absolute inset-0"
-        >
-          <pattern
-            id="grid"
-            width="40"
-            height="40"
-            patternUnits="userSpaceOnUse"
-          >
-            <rect
-              width="40"
-              height="40"
-              fill="none"
-              stroke="white"
-              strokeWidth="0.5"
-              className="opacity-40 animate-gridPulse"
-            />
-          </pattern>
-          <rect width="100%" height="100%" fill="url(#grid)" />
-        </svg>
-      </div>
-    </div>
-  );
-};
-
 export default function Hero() {
   const words = ["Learner", "Engineer", "Developer", "Problem-Solver"];
-  const [meteorCount, setMeteorCount] = useState(6);
   const [resumeUrl, setResumeUrl] = useState(() => getPublicResumeUrl());
 
   // Code block with Anand
@@ -76,29 +41,6 @@ const profile = {
   }, [code]);
 
   useEffect(() => {
-    const mediaMobile = window.matchMedia("(max-width: 767px)");
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-    const update = () => {
-      if (reducedMotion.matches) {
-        setMeteorCount(0);
-      } else if (mediaMobile.matches) {
-        setMeteorCount(3);
-      } else {
-        setMeteorCount(6);
-      }
-    };
-
-    update();
-    mediaMobile.addEventListener("change", update);
-    reducedMotion.addEventListener("change", update);
-    return () => {
-      mediaMobile.removeEventListener("change", update);
-      reducedMotion.removeEventListener("change", update);
-    };
-  }, []);
-
-  useEffect(() => {
     const handleResumeUpdate = () => setResumeUrl(getPublicResumeUrl());
     window.addEventListener("resume-updated", handleResumeUpdate);
     return () => window.removeEventListener("resume-updated", handleResumeUpdate);
@@ -112,13 +54,6 @@ const profile = {
           className="hero min-h-[calc(100vh-5rem)] scroll-mt-28 flex items-center relative px-4 sm:px-6 lg:px-8"
         >
           <div className="absolute inset-0"></div>
-
-          <GridBackground />
-
-          {/* Meteors Effect */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <Meteors number={meteorCount} />
-          </div>
 
           <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between relative z-10 py-12 lg:py-0">
             {/* Left column - Text content */}
