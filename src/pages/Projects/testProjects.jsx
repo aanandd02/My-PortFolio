@@ -8,51 +8,63 @@ import mealStackImg from "../../assets/images/MealStack.png";
 import hotelApiImg from "../../assets/images/Hotel Booking API.png";
 import svrImg from "../../assets/images/SVR.png";
 import mailautoImg from "../../assets/images/ai-email-automation-banner.png";
+import anubhavMedicalImg from "../../assets/images/AnubhavMedical.png";
 
 const projects = [
   {
-    title: "AI Email Automation",
+    title: "AI HR Email Automation",
     description:
-      "An AI-powered email outreach automation system using Google Gemini AI, Google Sheets API, and Gmail via Nodemailer.",
+      "Automates personalized HR outreach emails using Google Sheets contacts, Groq-based subject/body generation, Gmail delivery, and local JSON duplicate prevention.",
     src: mailautoImg,
     color: "#8a2be2",
     githubLink: "https://github.com/aanandd02/Ai-emails-automation",
     liveLink: "",
-    tech: "Node.js, Express.js, Gemini AI, Google Sheets API, Gmail",
+    tech: "Node.js (ESM), Groq SDK, Google Sheets API, Nodemailer, dotenv",
     date: "Nov 2025",
   },
   {
     title: "Shree Vishwanath Roadways (SVR)",
     description:
-      "A professional logistics and transport solutions website with responsive design and service-focused UI.",
+      "Official single-page logistics marketing website for SVR with hero video, fleet gallery lightbox, testimonial carousel, contact + maps, WhatsApp/Get Quote actions, and PWA caching.",
     src: svrImg,
     color: "#ffcc00",
-    githubLink: "",
-    liveLink: "https://shree-vishwanath-roadways.onrender.com/",
-    tech: "React.js, Vite, CSS",
+    githubLink: "https://github.com/aanandd02/SVR",
+    liveLink: "https://svr-1skj.onrender.com",
+    tech: "React 19, Vite 7, Framer Motion, React Icons, react-tsparticles, CSS",
     date: "Oct 2025",
   },
   {
     title: "CodeSavant-AI",
     description:
-      "AI code review platform with Node.js/Express backend integrated with LangChain and Gemini AI.",
+      "AI-powered code review app where users submit code by language and get structured feedback sections for mistakes, improvements, and corrected code via Groq-backed review API.",
     src: codeSavantImg,
     color: "#f58b57",
-    githubLink: "",
-    liveLink: "https://codesavant-ai-frontend.onrender.com",
-    tech: "Node.js, Express.js, React.js, LangChain",
+    githubLink: "https://github.com/aanandd02/CodeSavant-AI",
+    liveLink: "https://codesavant-ai.onrender.com",
+    tech: "React 19, Vite, Auth0, Node.js, Express, Groq API, Serverless",
     date: "Jan 2025 - Feb 2025",
   },
   {
     title: "ReserveMate",
     description:
-      "Restaurant reservation system with real-time table updates and reduced booking errors.",
+      "Full-stack restaurant reservation app with React frontend and Express API, featuring validated booking flow, success feedback UX, and DynamoDB-based reservation storage.",
     src: reserveMateImg,
     color: "#50bfa0",
-    githubLink: "",
-    liveLink: "https://reservemate-o9h6.onrender.com",
-    tech: "React.js, Node.js, Express.js, MongoDB",
+    githubLink: "https://github.com/aanandd02/ReserveMate",
+    liveLink: "https://reservemate-frontend.onrender.com",
+    tech: "React 18, Vite 5, Node.js, Express, AWS DynamoDB, AWS Lambda",
     date: "Nov 2024 - Jan 2025",
+  },
+  {
+    title: "Anubhav Billing",
+    description:
+      "Billing and pharmacy management project focused on streamlined invoice handling and day-to-day medical store operations.",
+    src: anubhavMedicalImg,
+    color: "#ff6b6b",
+    githubLink: "https://github.com/aanandd02/Anubhav-Billing",
+    liveLink: "",
+    tech: "React.js, Node.js, Express.js, MongoDB",
+    date: "2025",
   },
   {
     title: "MealStack",

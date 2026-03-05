@@ -1,7 +1,7 @@
 const RESUME_PATH = import.meta.env.VITE_SUPABASE_RESUME_PATH || "latest-resume.pdf";
 const RESUME_VERSION_KEY = "resume_version";
 const FALLBACK_RESUME_URL =
-  "https://drive.google.com/file/d/1dqHj0e59CKZQNcpaXIuTdIxhZNoeIa7M/view?usp=sharing";
+  "https://drive.google.com/file/d/1tppKMCDPsWeHdtFIaMD-jWEUdVSz9hW-/view?usp=sharing";
 
 function cleanUrl(url) {
   return url ? url.replace(/\/+$/, "") : "";
