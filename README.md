@@ -18,28 +18,14 @@ This website is a reflection of my journey as a **Software Developer**, showcasi
 - **Deployment:** Render  
 - **Version Control:** Git & GitHub  
 
-## 🔐 Resume Admin (Latest Resume Auto-Update)
-This portfolio now includes a password-protected `Resume Admin` panel.
+## 🔐 Resume Link Config
+Resume button now uses a direct public link.
 
-How it works:
-- Admin logs in with Supabase Auth email/password.
-- Uploads a new PDF resume.
-- File is uploaded with `upsert` at one fixed path: `latest-resume.pdf`.
-- Old resume is automatically replaced (no manual delete needed).
-- Public `Resume` button always opens the latest uploaded file.
-
-Required `.env` vars:
+Required `.env` var:
 ```env
-VITE_SUPABASE_URL=your_supabase_project_url
-VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-VITE_SUPABASE_BUCKET=resumes
+VITE_RESUME_PUBLIC_URL=your_resume_public_link
 ```
-
-Supabase setup:
-1. Create a bucket named `resumes` and keep it `public`.
-2. Keep only authenticated users allowed for upload/update in Storage policies.
-3. Create admin user in Supabase Auth (email/password).
-4. Use that admin credential inside the `Resume Admin` panel in UI.
+If `VITE_RESUME_PUBLIC_URL` is not set, fallback resume link is used.
 
 ## 📬 Let’s Connect  
 - 💼 [LinkedIn](https://www.linkedin.com/in/ananadshukla05/)  
