@@ -1,6 +1,7 @@
 const RESUME_PATH = import.meta.env.VITE_SUPABASE_RESUME_PATH || "latest-resume.pdf";
 const RESUME_VERSION_KEY = "resume_version";
-const FALLBACK_RESUME_URL =
+const DIRECT_RESUME_URL = (import.meta.env.VITE_RESUME_PUBLIC_URL || "").trim();
+export const FALLBACK_RESUME_URL =
   "https://drive.google.com/file/d/1tppKMCDPsWeHdtFIaMD-jWEUdVSz9hW-/view?usp=sharing";
 
 function cleanUrl(url) {
@@ -32,6 +33,10 @@ export function markResumeUpdated() {
 }
 
 export function getPublicResumeUrl() {
+  if (DIRECT_RESUME_URL) {
+    return DIRECT_RESUME_URL;
+  }
+
   const config = getResumeConfig();
   if (!config.isReady) {
     return FALLBACK_RESUME_URL;
@@ -40,4 +45,36 @@ export function getPublicResumeUrl() {
   const version = getResumeVersion();
   const baseUrl = `${config.supabaseUrl}/storage/v1/object/public/${config.bucket}/${config.resumePath}`;
   return version ? `${baseUrl}?v=${version}` : baseUrl;
+}
+
+export async function resolvePublicResumeUrl() {
+  const publicUrl = getPublicResumeUrl();
+  if (!publicUrl.includes("/storage/v1/object/public/")) {
+    return publicUrl;
+  }
+
+  try {
+    const headResponse = await fetch(publicUrl, {
+      method: "HEAD",
+      cache: "no-store",
+    });
+
+    if (headResponse.ok) {
+      return publicUrl;
+    }
+
+    if (headResponse.status === 404) {
+      return FALLBACK_RESUME_URL;
+    }
+
+    // Some backends can reject HEAD while still serving GET correctly.
+    if (headResponse.status === 405) {
+      const getResponse = await fetch(publicUrl, { method: "GET", cache: "no-store" });
+      return getResponse.ok ? publicUrl : FALLBACK_RESUME_URL;
+    }
+
+    return publicUrl;
+  } catch {
+    return FALLBACK_RESUME_URL;
+  }
 }

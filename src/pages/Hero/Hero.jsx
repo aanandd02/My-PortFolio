@@ -5,7 +5,7 @@ import "@/assets/css/tomorrow.css";
 import PortfolioPage from "@/pages/About/About";
 import SparklesText from "@/components/ui/sparkles-text";
 import { FlipWords } from "@/components/ui/flip-words";
-import { getPublicResumeUrl } from "@/lib/resume";
+import { getPublicResumeUrl, resolvePublicResumeUrl } from "@/lib/resume";
 
 export default function Hero() {
   const words = ["Learner", "Engineer", "Developer", "Problem-Solver"];
@@ -41,9 +41,25 @@ const profile = {
   }, [code]);
 
   useEffect(() => {
-    const handleResumeUpdate = () => setResumeUrl(getPublicResumeUrl());
+    let active = true;
+    const syncResumeUrl = async () => {
+      const nextUrl = await resolvePublicResumeUrl();
+      if (active) {
+        setResumeUrl(nextUrl);
+      }
+    };
+
+    const handleResumeUpdate = () => {
+      setResumeUrl(getPublicResumeUrl());
+      syncResumeUrl();
+    };
+
+    syncResumeUrl();
     window.addEventListener("resume-updated", handleResumeUpdate);
-    return () => window.removeEventListener("resume-updated", handleResumeUpdate);
+    return () => {
+      active = false;
+      window.removeEventListener("resume-updated", handleResumeUpdate);
+    };
   }, []);
 
   return (

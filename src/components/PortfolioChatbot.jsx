@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { getPublicResumeUrl } from "@/lib/resume";
+import { getPublicResumeUrl, resolvePublicResumeUrl } from "@/lib/resume";
 
 const QUICK_QUESTIONS = [
   "Give me a 30-second profile summary",
@@ -65,7 +65,7 @@ function getBotReply(input, resumeUrl = "") {
 }
 
 export default function PortfolioChatbot() {
-  const resumeUrl = useMemo(() => getPublicResumeUrl(), []);
+  const [resumeUrl, setResumeUrl] = useState(() => getPublicResumeUrl());
   const listRef = useRef(null);
   const replyTimerRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -86,6 +86,19 @@ export default function PortfolioChatbot() {
     ],
     []
   );
+
+  useEffect(() => {
+    let active = true;
+    resolvePublicResumeUrl().then((url) => {
+      if (active) {
+        setResumeUrl(url);
+      }
+    });
+
+    return () => {
+      active = false;
+    };
+  }, []);
 
   useEffect(() => {
     if (!isOpen || !listRef.current) return;
