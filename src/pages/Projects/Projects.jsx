@@ -61,7 +61,7 @@ const projects = [
     src: anubhavMedicalImg,
     color: "#ff6b6b",
     githubLink: "https://github.com/aanandd02/Anubhav-Billing",
-    liveLink: "",
+    liveLink: "https://anubhav-billing.onrender.com/",
     tech: "React.js, Node.js, Express.js, MongoDB",
     date: "2025",
   },
