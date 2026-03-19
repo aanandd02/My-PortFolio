@@ -16,7 +16,7 @@ export default function Hero() {
 const profile = {
     name: 'Anand',
     skills: [
-        'Java', 'JavaScript', 'Node.js', 'Express.js',
+        'Java', 'JavaScript', 'Python', 'Node.js', 'Express.js',
         'MySQL', 'MongoDB', 'Elasticsearch',
         'AWS', 'Microservices', 'System Design'
     ],

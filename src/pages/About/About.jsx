@@ -31,12 +31,14 @@ export default function About() {
             <p className="text-lg font-medium text-cyan-200">Hi, I&apos;m Anand.</p>
             <p className="text-base leading-8 text-slate-200 md:text-lg">
               I am an aspiring Software Engineer & Backend Developer with a deep
-              passion for coding and problem-solving. I enjoy building something
-              new every day, whether it&apos;s an innovative project, a handy tool, or
-              a creative solution to a challenge. Beyond writing code, I bring
-              curiosity, adaptability, and a strong work ethic, allowing me to
-              contribute effectively to teams and projects. I&apos;m always eager to
-              take on new challenges, refine my skills, and explore fresh ideas.
+              passion for coding and problem-solving. I enjoy working with
+              technologies like Java, JavaScript, Node.js, and Python to build
+              something new every day, whether it&apos;s an innovative project, a
+              handy tool, or a creative solution to a challenge. Beyond writing
+              code, I bring curiosity, adaptability, and a strong work ethic,
+              allowing me to contribute effectively to teams and projects. I&apos;m
+              always eager to take on new challenges, refine my skills, and
+              explore fresh ideas.
             </p>
             <p className="text-base leading-8 text-slate-300 md:text-lg">
               Thank you for visiting my portfolio and taking the time to explore

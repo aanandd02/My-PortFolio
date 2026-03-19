@@ -36,6 +36,7 @@ import {
   SiLangchain,
   SiHuggingface,
   SiC,
+  SiPython,
   SiMysql,
   SiMongodb,
 } from "react-icons/si";
@@ -111,6 +112,7 @@ const SkillsSection = () => {
         { name: "C", icon: <SiC className="w-4 h-4 text-[#A8B9CC]" /> },
         { name: "Java", icon: <FaJava className="w-4 h-4 text-[#E11F21]" /> },
         { name: "JavaScript", icon: <SiJavascript className="w-4 h-4 text-[#F7DF1E]" /> },
+        { name: "Python", icon: <SiPython className="w-4 h-4 text-[#3776AB]" /> },
         { name: "SQL", icon: <SiMysql className="w-4 h-4 text-[#00618A]" /> },
       ],
     },

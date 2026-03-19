@@ -54,6 +54,7 @@ const PORTFOLIO_SCOPE_KEYWORDS = [
   "react",
   "node",
   "express",
+  "python",
   "developer",
   "engineer",
   "hire",
@@ -94,7 +95,7 @@ Projects:
 - Shree Vishwanath Roadways (SVR): Official logistics marketing website with hero video, fleet gallery, testimonials, maps, and PWA caching.
 
 Skills:
-- Languages: C, Java, JavaScript, SQL.
+- Languages: C, Java, JavaScript, Python, SQL.
 - Backend: Node.js, Express.js, REST APIs, JWT Auth, Microservices, System Design.
 - Databases and Search: MySQL, MongoDB, Elasticsearch.
 - Cloud: AWS, Lambda, EC2, S3, API Gateway, SQS, SNS, CloudWatch, Serverless, Event-Driven systems.
@@ -153,7 +154,7 @@ export function getFallbackReply(input, resumeUrl = "") {
   }
 
   if (text.includes("skill") || text.includes("backend") || text.includes("tech stack")) {
-    return "His core strengths include Node.js, Express, REST APIs, JWT auth, MySQL, MongoDB, Elasticsearch, AWS serverless tools, and practical AI integrations. He is strongest on backend engineering.";
+    return "His core strengths include Node.js, Express, Python, REST APIs, JWT auth, MySQL, MongoDB, Elasticsearch, AWS serverless tools, and practical AI integrations. He is strongest on backend engineering.";
   }
 
   if (text.includes("resume") || text.includes("cv")) {
