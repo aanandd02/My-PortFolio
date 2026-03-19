@@ -68,9 +68,9 @@ const ExperienceSection = () => {
       icon: Server,
       title: "Backend Engineer Intern",
       company: "Synup",
-      period: "Jan 2026 – Present",
+      period: "Jan 2026 – Mar 2026",
       description:
-        "Working on serverless microservices using AWS Lambda, MySQL, Elasticsearch, and S3 in an event-driven fan-out system. Resolved a critical race condition in Prospect-Up pipeline with consistent MySQL transactional updates across concurrent services, and built a quarterly Outscraper-powered ingestion pipeline for optimized search and reliable profile generation.",
+        "Worked on serverless microservices using AWS Lambda, MySQL, Elasticsearch, and S3 in an event-driven fan-out system. Resolved a critical race condition in Prospect-Up pipeline with consistent MySQL transactional updates across concurrent services, and built a quarterly Outscraper-powered ingestion pipeline for optimized search and reliable profile generation.",
     },
     {
       icon: Code2,

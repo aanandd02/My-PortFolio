@@ -21,7 +21,7 @@ const profile = {
         'AWS', 'Microservices', 'System Design'
     ],
     dsaProblemsSolved: 400,
-    currentRole: 'Backend Engineer Intern @ Synup',
+    currentRole: 'Backend Engineer @ Node.js',
     hardWorker: true,
     scalableThinking: true,
     problemSolver: true,

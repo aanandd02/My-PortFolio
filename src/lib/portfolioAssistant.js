@@ -77,8 +77,8 @@ About:
 - He is comfortable with APIs, backend workflows, cloud tools, and AI integrations.
 
 Experience:
-- Backend Engineer Intern at Synup, Jan 2026 to Present.
-- Works on serverless microservices using AWS Lambda, MySQL, Elasticsearch, and S3 in an event-driven fan-out system.
+- Backend Engineer Intern at Synup, Jan 2026 to Mar 2026.
+- Worked on serverless microservices using AWS Lambda, MySQL, Elasticsearch, and S3 in an event-driven fan-out system.
 - Resolved a critical race condition in the Prospect-Up pipeline with consistent MySQL transactional updates across concurrent services.
 - Built a quarterly Outscraper-powered ingestion pipeline for optimized search and reliable profile generation.
 - Backend Developer Intern at BrandX, Oct 2024 to Jan 2025.
