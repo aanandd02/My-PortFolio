@@ -8,8 +8,20 @@ import hotelApiImg from "../../assets/images/Hotel Booking API.png";
 import svrImg from "../../assets/images/SVR.png";
 import mailautoImg from "../../assets/images/ai-email-automation-banner.png";
 import anubhavMedicalImg from "../../assets/images/AnubhavMedical.png";
+import sikhoFlowImg from "../../assets/images/sikhoflow.png";
 
 const projects = [
+  {
+    title: "SikhoFlow",
+    description:
+      "AI-powered infrastructure for modern educational institutions. Features personalized tutoring, automated assessments, and administrative excellence all integrated into one seamless ecosystem.",
+    src: sikhoFlowImg,
+    color: "#4f46e5",
+    githubLink: "",
+    liveLink: "https://d2qgmxan2aspm7.cloudfront.net/",
+    tech: "AI/LLMs, Modern Frontend, Cloud Infrastructure",
+    date: "2026",
+  },
   {
     title: "AI HR Email Automation",
     description:
@@ -129,9 +141,9 @@ export default function Projects() {
 
         {isMobile ? (
           <div className="px-4">
-            <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="flex items-stretch gap-4 overflow-x-auto snap-x snap-mandatory pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {projects.map((project, i) => (
-                <div key={`mobile_${i}`} className="snap-center shrink-0 w-[88vw] max-w-[380px]">
+                <div key={`mobile_${i}`} className="snap-center shrink-0 w-[88vw] max-w-[380px] flex">
                   <ProjectCardContent project={project} compact />
                 </div>
               ))}
@@ -140,14 +152,14 @@ export default function Projects() {
           </div>
         ) : (
           projects.map((project, i) => {
-            const targetScale = 1 - (projects.length - i) * 0.05;
+            const targetScale = 1 - (projects.length - 1 - i) * 0.05;
             return (
               <DesktopCard
                 key={`desktop_${i}`}
                 i={i}
                 project={project}
                 progress={scrollYProgress}
-                range={[i * 0.25, 1]}
+                range={[i * (1 / projects.length), 1]}
                 targetScale={targetScale}
               />
             );
@@ -190,7 +202,7 @@ function DesktopCard({ project, progress, range, targetScale }) {
     <div className="h-[86vh] sticky top-20 flex items-center justify-center">
       <motion.div
         style={{ scale }}
-        className="w-[88%] lg:w-[75%] xl:w-[65%]"
+        className="w-[88%] lg:w-[75%] xl:w-[65%] h-[420px] md:h-[400px] lg:h-[460px]"
         whileHover={{ y: -8, transition: { duration: 0.3 } }}
       >
         <ProjectCardContent project={project} />
@@ -201,8 +213,8 @@ function DesktopCard({ project, progress, range, targetScale }) {
 
 function ProjectCardContent({ project, compact = false }) {
   return (
-    <div className="w-full flex flex-col md:flex-row bg-zinc-900 rounded-2xl overflow-hidden shadow-xl border border-white/10">
-      <div className={`w-full md:w-[50%] ${compact ? "h-[190px]" : "h-[220px] md:h-[380px] lg:h-[420px]"} relative overflow-hidden bg-gray-800`}>
+    <div className="w-full h-full flex flex-col md:flex-row bg-zinc-900 rounded-2xl overflow-hidden shadow-xl border border-white/10">
+      <div className={`w-full shrink-0 md:w-[50%] ${compact ? "h-[190px]" : "h-[220px] md:h-full"} relative overflow-hidden bg-gray-800`}>
         {project.src ? (
           <img
             src={project.src}
@@ -220,7 +232,7 @@ function ProjectCardContent({ project, compact = false }) {
         />
       </div>
 
-      <div className={`w-full md:w-[50%] ${compact ? "p-4" : "p-6 md:p-8 lg:p-10"} flex flex-col justify-between`}>
+      <div className={`w-full flex-1 md:w-[50%] min-h-0 ${compact ? "p-4" : "p-6 md:p-8 lg:p-10"} flex flex-col justify-between overflow-hidden`}>
         <div>
           <h3 className={`${compact ? "text-lg" : "text-xl md:text-2xl lg:text-3xl"} font-bold mb-2`}>
             {project.title}

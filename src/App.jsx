@@ -2,7 +2,6 @@ import { Suspense, lazy, useEffect, useState } from "react";
 import "./assets/css/index.css";
 import Header from "./pages/Header/Header";
 import Hero from "./pages/Hero/Hero";
-import BackToTop from "./components/BackToTop";
 import PortfolioChatbot from "./components/PortfolioChatbot";
 import Meteors from "./components/ui/meteors";
 
@@ -53,7 +52,6 @@ export default function App() {
             <Contact />
           </Suspense>
         </div>
-        <BackToTop />
         <PortfolioChatbot />
       </div>
     </>
