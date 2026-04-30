@@ -116,7 +116,7 @@ const profile = {
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 animate__animated animate__fadeInUp animate__delay-2s">
                 {/* LinkedIn Button */}
                 <a
-                  href="https://www.linkedin.com/in/ananadshukla05/"
+                  href="https://www.linkedin.com/in/aanandd02/"
                   target="_blank"
                   rel="noopener noreferrer"
                   onMouseEnter={playHoverSound}
