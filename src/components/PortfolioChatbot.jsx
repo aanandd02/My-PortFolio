@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { getPublicResumeUrl, resolvePublicResumeUrl } from "@/lib/resume";
 import { fetchPortfolioAssistantReply, getFallbackReply } from "@/lib/portfolioAssistant";
+import { playOpenSound, playCloseSound, playHoverSound } from "@/lib/sounds";
 
 const STARTER_QUESTIONS = [
   "Give me a short summary about Anand",
@@ -33,6 +34,13 @@ export default function PortfolioChatbot() {
       text: WELCOME_MESSAGE,
     },
   ]);
+
+  const toggleChat = () => {
+    if (!isOpen) playOpenSound();
+    else playCloseSound();
+    setIsOpen(!isOpen);
+    if (isOpen) resetChat();
+  };
 
   useEffect(() => {
     let active = true;
@@ -126,20 +134,14 @@ export default function PortfolioChatbot() {
         className={`fixed inset-0 z-[65] bg-slate-950/60 backdrop-blur-sm transition-opacity duration-300 sm:hidden ${
           isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
-        onClick={() => setIsOpen(false)}
+        onClick={() => { playCloseSound(); setIsOpen(false); }}
       />
 
       {/* Floating Button */}
       <button
         type="button"
-        onClick={() => {
-          if (isOpen) {
-            setIsOpen(false);
-            resetChat();
-            return;
-          }
-          setIsOpen(true);
-        }}
+        onMouseEnter={playHoverSound}
+        onClick={toggleChat}
         className={`fixed z-[70] flex items-center gap-2.5 rounded-full border border-cyan-400/20 bg-slate-950/80 p-1.5 pr-5 text-left shadow-[0_0_30px_rgba(34,211,238,0.15)] backdrop-blur-xl transition-all duration-300 ease-out hover:border-cyan-400/50 hover:bg-slate-900 hover:shadow-[0_0_40px_rgba(34,211,238,0.3)]
           bottom-5 left-1/2 -translate-x-1/2 sm:bottom-6 sm:left-auto sm:right-6 sm:translate-x-0
           ${isOpen ? 'translate-y-20 opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'}
@@ -195,6 +197,7 @@ export default function PortfolioChatbot() {
               <button
                 type="button"
                 onClick={resetChat}
+                onMouseEnter={playHoverSound}
                 className="flex h-8 w-8 items-center justify-center rounded-full bg-white/5 text-gray-400 transition-colors hover:bg-white/10 hover:text-white"
                 title="New Chat"
               >
@@ -202,7 +205,8 @@ export default function PortfolioChatbot() {
               </button>
               <button
                 type="button"
-                onClick={() => setIsOpen(false)}
+                onClick={() => { playCloseSound(); setIsOpen(false); }}
+                onMouseEnter={playHoverSound}
                 className="flex h-8 w-8 items-center justify-center rounded-full bg-white/5 text-gray-400 transition-colors hover:bg-white/10 hover:text-white"
                 title="Close Chat"
               >

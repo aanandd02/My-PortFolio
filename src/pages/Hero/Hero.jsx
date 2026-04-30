@@ -4,8 +4,10 @@ import "prismjs/components/prism-javascript";
 import "@/assets/css/tomorrow.css";
 import PortfolioPage from "@/pages/About/About";
 import SparklesText from "@/components/ui/sparkles-text";
+import Tilt from "react-parallax-tilt";
 import { FlipWords } from "@/components/ui/flip-words";
 import { getPublicResumeUrl, resolvePublicResumeUrl } from "@/lib/resume";
+import { playHoverSound } from "@/lib/sounds";
 
 export default function Hero() {
   const words = ["Learner", "Engineer", "Developer", "Problem-Solver"];
@@ -117,6 +119,7 @@ const profile = {
                   href="https://www.linkedin.com/in/ananadshukla05/"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onMouseEnter={playHoverSound}
                   className="group relative inline-flex items-center justify-center gap-3 bg-gradient-to-r from-blue-500 to-teal-400 p-0.5 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-[0_0_2rem_-0.5rem_#60A5FA]"
                 >
                   <span className="block w-full px-6 sm:px-8 py-3 sm:py-4 rounded-[11px] bg-gray-900 transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-teal-400">
@@ -132,6 +135,7 @@ const profile = {
                   href={resumeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onMouseEnter={playHoverSound}
                   className="group relative inline-flex items-center justify-center gap-3 p-0.5 rounded-xl bg-gradient-to-r from-gray-800 to-gray-700 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_2rem_-0.5rem_#60A5FA]"
                 >
                   <span className="block w-full px-6 sm:px-8 py-3 sm:py-4 rounded-[11px] bg-gray-900 border border-gray-700/50 transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-gray-800 group-hover:to-gray-700">
@@ -164,22 +168,32 @@ const profile = {
 
             {/* Right column - Code window */}
             <div className="w-full lg:w-1/2 animate__animated animate__fadeInDown animate__delay-0.1s">
-              <div className="gradient-border">
-                <div className="code-window bg-[#091121]">
-                  <div className="window-header">
-                    <div className="window-dot bg-red-500"></div>
-                    <div className="window-dot bg-yellow-500"></div>
-                    <div className="window-dot bg-green-500"></div>
-                    <span className="ml-2 text-sm text-gray-400 flex items-center gap-2">
-                      <i className="fas fa-code"></i>
-                      about.js
-                    </span>
+              <Tilt
+                tiltMaxAngleX={8}
+                tiltMaxAngleY={8}
+                perspective={1000}
+                transitionSpeed={1500}
+                scale={1.02}
+                gyroscope={true}
+                className="w-full"
+              >
+                <div className="gradient-border">
+                  <div className="code-window bg-[#091121]">
+                    <div className="window-header">
+                      <div className="window-dot bg-red-500"></div>
+                      <div className="window-dot bg-yellow-500"></div>
+                      <div className="window-dot bg-green-500"></div>
+                      <span className="ml-2 text-sm text-gray-400 flex items-center gap-2">
+                        <i className="fas fa-code"></i>
+                        about.js
+                      </span>
+                    </div>
+                    <pre className="language-javascript">
+                      <code className="language-javascript">{code}</code>
+                    </pre>
                   </div>
-                  <pre className="language-javascript">
-                    <code className="language-javascript">{code}</code>
-                  </pre>
                 </div>
-              </div>
+              </Tilt>
             </div>
           </div>
         </section>

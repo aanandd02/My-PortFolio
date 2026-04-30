@@ -1,4 +1,5 @@
 import { useTransform, motion, useScroll } from "framer-motion";
+import Tilt from "react-parallax-tilt";
 import { useRef, useState, useEffect } from "react";
 
 import codeSavantImg from "../../assets/images/CodeSavant-AI.png";
@@ -205,7 +206,9 @@ function DesktopCard({ project, progress, range, targetScale }) {
         className="w-[88%] lg:w-[75%] xl:w-[65%] h-[420px] md:h-[400px] lg:h-[460px]"
         whileHover={{ y: -8, transition: { duration: 0.3 } }}
       >
-        <ProjectCardContent project={project} />
+        <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5} perspective={2000} transitionSpeed={1500} scale={1.01} className="w-full h-full">
+          <ProjectCardContent project={project} />
+        </Tilt>
       </motion.div>
     </div>
   );
