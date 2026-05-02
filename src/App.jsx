@@ -83,7 +83,7 @@ function GlobalBackground() {
               fill="none"
               stroke="white"
               strokeWidth="0.5"
-              className="opacity-40 animate-gridPulse"
+              className="opacity-40"
             />
           </pattern>
           <rect width="100%" height="100%" fill="url(#grid)" />
