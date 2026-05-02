@@ -4,7 +4,6 @@ import "prismjs/components/prism-javascript";
 import "@/assets/css/tomorrow.css";
 import PortfolioPage from "@/pages/About/About";
 import SparklesText from "@/components/ui/sparkles-text";
-import Tilt from "react-parallax-tilt";
 import { FlipWords } from "@/components/ui/flip-words";
 import { getPublicResumeUrl, resolvePublicResumeUrl } from "@/lib/resume";
 import { playHoverSound } from "@/lib/sounds";
@@ -168,15 +167,7 @@ const profile = {
 
             {/* Right column - Code window */}
             <div className="w-full lg:w-1/2 animate__animated animate__fadeInDown animate__delay-0.1s">
-              <Tilt
-                tiltMaxAngleX={8}
-                tiltMaxAngleY={8}
-                perspective={1000}
-                transitionSpeed={1500}
-                scale={1.02}
-                gyroscope={true}
-                className="w-full"
-              >
+              <div className="w-full">
                 <div className="gradient-border">
                   <div className="code-window bg-[#091121]">
                     <div className="window-header">
@@ -193,7 +184,7 @@ const profile = {
                     </pre>
                   </div>
                 </div>
-              </Tilt>
+              </div>
             </div>
           </div>
         </section>
