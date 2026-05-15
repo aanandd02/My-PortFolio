@@ -131,7 +131,7 @@ export default function PortfolioChatbot() {
     <>
       {/* Background overlay for mobile */}
       <div 
-        className={`fixed inset-0 z-[65] bg-slate-950/60 backdrop-blur-sm transition-opacity duration-300 sm:hidden ${
+        className={`fixed inset-0 z-[65] bg-slate-950/80 sm:backdrop-blur-sm transition-opacity duration-300 sm:hidden ${
           isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
         onClick={() => { playCloseSound(); setIsOpen(false); }}
@@ -142,7 +142,7 @@ export default function PortfolioChatbot() {
         type="button"
         onMouseEnter={playHoverSound}
         onClick={toggleChat}
-        className={`fixed z-[70] flex items-center gap-2.5 rounded-full border border-cyan-400/20 bg-slate-950/80 p-1.5 pr-5 text-left shadow-[0_0_30px_rgba(34,211,238,0.15)] backdrop-blur-xl transition-all duration-300 ease-out hover:border-cyan-400/50 hover:bg-slate-900 hover:shadow-[0_0_40px_rgba(34,211,238,0.3)]
+        className={`fixed z-[70] flex items-center gap-2.5 rounded-full border border-cyan-400/20 bg-slate-950/90 p-1.5 pr-5 text-left shadow-[0_0_30px_rgba(34,211,238,0.15)] sm:backdrop-blur-xl transition-all duration-300 ease-out hover:border-cyan-400/50 hover:bg-slate-900 hover:shadow-[0_0_40px_rgba(34,211,238,0.3)]
           bottom-5 left-1/2 -translate-x-1/2 sm:bottom-6 sm:left-auto sm:right-6 sm:translate-x-0
           ${isOpen ? 'translate-y-20 opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'}
         `}
@@ -178,7 +178,7 @@ export default function PortfolioChatbot() {
           }
         `}
       >
-        <div className="relative border-b border-white/5 bg-white/[0.02] px-4 pb-4 pt-5 backdrop-blur-md sm:px-5 sm:pb-5 sm:pt-5">
+        <div className="relative border-b border-white/5 bg-slate-900 px-4 pb-4 pt-5 sm:bg-white/[0.02] sm:backdrop-blur-md sm:px-5 sm:pb-5 sm:pt-5">
           <div className="absolute left-1/2 top-2.5 h-1.5 w-12 -translate-x-1/2 rounded-full bg-white/20 sm:hidden" />
           
           <div className="flex flex-wrap items-start justify-between gap-3 mt-1 sm:mt-0">

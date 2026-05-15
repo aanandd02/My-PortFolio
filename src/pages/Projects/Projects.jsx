@@ -2,14 +2,14 @@ import { useTransform, motion, useScroll } from "framer-motion";
 import Tilt from "react-parallax-tilt";
 import { useRef, useState, useEffect } from "react";
 
-import codeSavantImg from "../../assets/images/CodeSavant-AI.png";
-import reserveMateImg from "../../assets/images/Reservemate.png";
-import mealStackImg from "../../assets/images/MealStack.png";
-import hotelApiImg from "../../assets/images/Hotel Booking API.png";
-import svrImg from "../../assets/images/SVR.png";
-import mailautoImg from "../../assets/images/ai-email-automation-banner.png";
-import anubhavMedicalImg from "../../assets/images/AnubhavMedical.png";
-import sikhoFlowImg from "../../assets/images/sikhoflow.png";
+import codeSavantImg from "../../assets/images/CodeSavant-AI.jpg";
+import reserveMateImg from "../../assets/images/Reservemate.jpg";
+import mealStackImg from "../../assets/images/MealStack.jpg";
+import hotelApiImg from "../../assets/images/Hotel Booking API.jpg";
+import svrImg from "../../assets/images/SVR.jpg";
+import mailautoImg from "../../assets/images/ai-email-automation-banner.jpg";
+import anubhavMedicalImg from "../../assets/images/AnubhavMedical.jpg";
+import sikhoFlowImg from "../../assets/images/sikhoflow.jpg";
 
 const projects = [
   {

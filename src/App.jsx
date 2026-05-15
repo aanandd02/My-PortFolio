@@ -27,27 +27,27 @@ export default function App() {
       <div className="relative z-20">
         <Header />
         <Hero />
-        <div id="skills" className="scroll-mt-28 cv-auto">
+        <div id="skills" className="scroll-mt-28 cv-auto will-change-transform">
           <Suspense fallback={<SectionFallback label="Loading skills..." />}>
             <Skills />
           </Suspense>
         </div>
-        <div id="experience" className="scroll-mt-28 cv-auto">
+        <div id="experience" className="scroll-mt-28 cv-auto will-change-transform">
           <Suspense fallback={<SectionFallback label="Loading experience..." />}>
             <Experience />
           </Suspense>
         </div>
-        <div id="education" className="scroll-mt-28 cv-auto">
+        <div id="education" className="scroll-mt-28 cv-auto will-change-transform">
           <Suspense fallback={<SectionFallback label="Loading education..." />}>
             <Education />
           </Suspense>
         </div>
-        <div id="projects" className="scroll-mt-28 cv-auto">
+        <div id="projects" className="scroll-mt-28 cv-auto will-change-transform">
           <Suspense fallback={<SectionFallback label="Loading projects..." />}>
             <Projects />
           </Suspense>
         </div>
-        <div id="contact" className="scroll-mt-28 cv-auto">
+        <div id="contact" className="scroll-mt-28 cv-auto will-change-transform">
           <Suspense fallback={<SectionFallback label="Loading contact..." />}>
             <Contact />
           </Suspense>

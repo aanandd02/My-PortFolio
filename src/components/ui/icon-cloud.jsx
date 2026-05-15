@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useTheme } from "next-themes";
 import { Cloud, fetchSimpleIcons, renderSimpleIcon } from "react-icon-cloud";
 
-export const cloudProps = {
+export const getCloudProps = (isMobile) => ({
   containerProps: {
     style: {
       display: "flex",
@@ -14,7 +14,7 @@ export const cloudProps = {
   },
   options: {
     reverse: true,
-    depth: 1,
+    depth: isMobile ? 0.5 : 1,
     wheelZoom: false,
     imageScale: 1.75,
     activeCursor: "default",
@@ -23,13 +23,13 @@ export const cloudProps = {
     clickToFront: 500,
     tooltipDelay: 0,
     outlineColour: "#000",
-    maxSpeed: 0.022,
-    minSpeed: 0.01,
+    maxSpeed: isMobile ? 0.01 : 0.022,
+    minSpeed: isMobile ? 0.005 : 0.01,
     // dragControl: false,
   },
-};
+});
 
-export const renderCustomIcon = (icon, theme, imageArray) => {
+export const renderCustomIcon = (icon, theme) => {
   const bgHex = theme === "light" ? "#f3f2ef" : "#080510";
   const fallbackHex = theme === "light" ? "#6e6e73" : "#ffffff";
   const minContrastRatio = theme === "dark" ? 2 : 1.2;
@@ -50,17 +50,23 @@ export const renderCustomIcon = (icon, theme, imageArray) => {
 };
 
 export default function IconCloud({
-  // Default to an empty array if not provided
   iconSlugs = [],
-
   imageArray,
 }) {
   const [data, setData] = useState(null);
   const { theme } = useTheme();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+    setIsMobile(media.matches);
+    const handler = (e) => setIsMobile(e.matches);
+    media.addEventListener("change", handler);
+    return () => media.removeEventListener("change", handler);
+  }, []);
 
   useEffect(() => {
     if (iconSlugs.length > 0) {
-      // Check if iconSlugs is not empty
       fetchSimpleIcons({ slugs: iconSlugs }).then(setData);
     }
   }, [iconSlugs]);
@@ -72,6 +78,8 @@ export default function IconCloud({
       renderCustomIcon(icon, theme || "dark")
     );
   }, [data, theme]);
+
+  const cloudProps = useMemo(() => getCloudProps(isMobile), [isMobile]);
 
   return (
     // @ts-ignore
