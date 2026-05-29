@@ -19,7 +19,7 @@ const projects = [
     src: sikhoFlowImg,
     color: "#4f46e5",
     githubLink: "",
-    liveLink: "https://d2qgmxan2aspm7.cloudfront.net/",
+    liveLink: "https://sikhoflow.com",
     tech: "AI/LLMs, Modern Frontend, Cloud Infrastructure",
     date: "2026",
   },
