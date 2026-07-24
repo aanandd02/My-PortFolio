@@ -17,7 +17,7 @@ const projects = [
     description:
       "AI-powered infrastructure for modern educational institutions. Features personalized tutoring, automated assessments, and administrative excellence all integrated into one seamless ecosystem.",
     src: sikhoFlowImg,
-    color: "#4f46e5",
+    color: "#6366f1",
     githubLink: "",
     liveLink: "https://sikhoflow.com",
     tech: "AI/LLMs, Modern Frontend, Cloud Infrastructure",
@@ -28,7 +28,7 @@ const projects = [
     description:
       "Automates personalized HR outreach emails using Google Sheets contacts, Groq-based subject/body generation, Gmail delivery, and local JSON duplicate prevention.",
     src: mailautoImg,
-    color: "#8a2be2",
+    color: "#8b5cf6",
     githubLink: "https://github.com/aanandd02/Ai-emails-automation",
     liveLink: "",
     tech: "Node.js (ESM), Groq SDK, Google Sheets API, Nodemailer, dotenv",
@@ -39,7 +39,7 @@ const projects = [
     description:
       "Official single-page logistics marketing website for SVR with hero video, fleet gallery lightbox, testimonial carousel, contact + maps, WhatsApp/Get Quote actions, and PWA caching.",
     src: svrImg,
-    color: "#ffcc00",
+    color: "#eab308",
     githubLink: "https://github.com/aanandd02/SVR",
     liveLink: "https://svr-1skj.onrender.com",
     tech: "React 19, Vite 7, Framer Motion, React Icons, react-tsparticles, CSS",
@@ -50,7 +50,7 @@ const projects = [
     description:
       "AI-powered code review app where users submit code by language and get structured feedback sections for mistakes, improvements, and corrected code via Groq-backed review API.",
     src: codeSavantImg,
-    color: "#f58b57",
+    color: "#f97316",
     githubLink: "https://github.com/aanandd02/CodeSavant-AI",
     liveLink: "https://codesavant-ai.onrender.com",
     tech: "React 19, Vite, Auth0, Node.js, Express, Groq API, Serverless",
@@ -61,7 +61,7 @@ const projects = [
     description:
       "Full-stack restaurant reservation app with React frontend and Express API, featuring validated booking flow, success feedback UX, and DynamoDB-based reservation storage.",
     src: reserveMateImg,
-    color: "#50bfa0",
+    color: "#10b981",
     githubLink: "https://github.com/aanandd02/ReserveMate",
     liveLink: "https://reservemate-frontend.onrender.com",
     tech: "React 18, Vite 5, Node.js, Express, AWS DynamoDB, AWS Lambda",
@@ -72,7 +72,7 @@ const projects = [
     description:
       "Billing and pharmacy management project focused on streamlined invoice handling and day-to-day medical store operations.",
     src: anubhavMedicalImg,
-    color: "#ff6b6b",
+    color: "#ef4444",
     githubLink: "https://github.com/aanandd02/Anubhav-Billing",
     liveLink: "https://anubhav-billing.onrender.com/",
     tech: "React.js, Node.js, Express.js, MongoDB",
@@ -83,7 +83,7 @@ const projects = [
     description:
       "Secure backend with JWT auth and role-based access for food ordering operations.",
     src: mealStackImg,
-    color: "#5196fd",
+    color: "#3b82f6",
     githubLink: "https://github.com/Aanandshukla02/MealStack",
     liveLink: "",
     tech: "Node.js, Express.js, MongoDB, JWT",
@@ -94,7 +94,7 @@ const projects = [
     description:
       "REST API backend for hotel management with schema validation and role-based filtering.",
     src: hotelApiImg,
-    color: "#e67e22",
+    color: "#f59e0b",
     githubLink: "https://github.com/Aanandshukla02/Node_Hotels",
     liveLink: "",
     tech: "Node.js, Express.js, MongoDB, Mongoose",
@@ -133,9 +133,10 @@ export default function Projects() {
 
   return (
     <main className="relative" ref={container}>
-      <section className="text-white w-full pb-10 md:pb-16">
+      <section className="text-[#1e293b] w-full pb-10 md:pb-16">
         <div className="pt-10 md:pt-14 pb-4 text-center px-4">
-          <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold bg-gradient-to-r from-cyan-300 via-blue-400 to-emerald-300 bg-clip-text text-transparent">
+          <p className="text-indigo-600 text-sm font-bold tracking-widest uppercase mb-3">Portfolio</p>
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold bg-gradient-to-r from-sky-600 via-indigo-600 to-sky-600 bg-clip-text text-transparent">
             Featured Projects
           </h2>
         </div>
@@ -149,7 +150,7 @@ export default function Projects() {
                 </div>
               ))}
             </div>
-            <p className="mt-3 text-center text-xs text-gray-400">Swipe left/right to view projects</p>
+            <p className="mt-3 text-center text-xs text-slate-500 font-semibold">Swipe left/right to view projects</p>
           </div>
         ) : (
           projects.map((project, i) => {
@@ -173,19 +174,19 @@ export default function Projects() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, y: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 1.5 }}
-          className="fixed bottom-5 inset-x-0 flex flex-col items-center justify-center text-white text-sm z-[9999] pointer-events-none select-none"
+          className="fixed bottom-5 inset-x-0 flex flex-col items-center justify-center text-sm z-[9999] pointer-events-none select-none"
         >
-          <span className="mb-1 text-xs sm:text-sm opacity-80">Scroll Down</span>
+          <span className="mb-1 text-xs sm:text-sm opacity-70 tracking-widest uppercase font-semibold text-slate-650">Scroll Down</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="22"
             height="22"
             fill="none"
-            stroke="white"
+            stroke="currentColor"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="animate-bounce"
+            className="animate-bounce opacity-75 text-slate-700"
           >
             <line x1="12" y1="5" x2="12" y2="19" />
             <polyline points="19,12 12,19 5,12" />
@@ -216,47 +217,47 @@ function DesktopCard({ project, progress, range, targetScale }) {
 
 function ProjectCardContent({ project, compact = false }) {
   return (
-    <div className="w-full h-full flex flex-col md:flex-row bg-zinc-900 rounded-2xl overflow-hidden shadow-xl border border-white/10">
-      <div className={`w-full shrink-0 md:w-[50%] ${compact ? "h-[190px]" : "h-[220px] md:h-full"} relative overflow-hidden bg-gray-800`}>
+    <div className="w-full h-full flex flex-col md:flex-row bg-white/95 rounded-2xl overflow-hidden shadow-xl border border-slate-200 backdrop-blur-sm">
+      <div className={`w-full shrink-0 md:w-[50%] ${compact ? "h-[190px]" : "h-[220px] md:h-full"} relative overflow-hidden bg-slate-100`}>
         {project.src ? (
           <img
             src={project.src}
             alt={project.title}
             loading="lazy"
             decoding="async"
-            className="w-full h-full object-cover opacity-80"
+            className="w-full h-full object-cover opacity-90 transition-opacity duration-300 hover:opacity-100"
           />
         ) : (
           <span>Project Preview</span>
         )}
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: project.color, mixBlendMode: "overlay", opacity: 0.25 }}
+          style={{ backgroundColor: project.color, mixBlendMode: "overlay", opacity: 0.15 }}
         />
       </div>
 
       <div className={`w-full flex-1 md:w-[50%] min-h-0 ${compact ? "p-4" : "p-6 md:p-8 lg:p-10"} flex flex-col justify-between overflow-hidden`}>
         <div>
-          <h3 className={`${compact ? "text-lg" : "text-xl md:text-2xl lg:text-3xl"} font-bold mb-2`}>
+          <h3 className={`${compact ? "text-lg" : "text-xl md:text-2xl lg:text-3xl"} font-bold mb-2 text-slate-800`}>
             {project.title}
           </h3>
-          <p className={`${compact ? "text-sm" : "text-sm md:text-base"} text-gray-300 leading-relaxed mb-2`}>
+          <p className={`${compact ? "text-sm" : "text-sm md:text-base"} text-slate-650 leading-relaxed mb-2 font-medium`}>
             {project.description}
           </p>
-          <p className="text-xs md:text-sm text-gray-400 italic mb-1">{project.tech}</p>
-          <p className="text-xs text-gray-500">{project.date}</p>
+          <p className="text-xs md:text-sm text-slate-500 italic mb-1 font-semibold">{project.tech}</p>
+          <p className="text-xs text-slate-400 font-semibold">{project.date}</p>
         </div>
 
-        <div className="mt-4 pt-3 border-t border-gray-700 flex gap-4">
+        <div className="mt-4 pt-3 border-t border-slate-200 flex gap-4">
           {project.githubLink && (
-            <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs sm:text-sm">
+            <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs sm:text-sm text-slate-500 hover:text-indigo-600 transition-colors font-semibold">
               <GitHubIcon color={project.color} />
               <span>Code</span>
             </a>
           )}
 
           {project.liveLink && (
-            <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs sm:text-sm">
+            <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs sm:text-sm text-slate-500 hover:text-indigo-600 transition-colors font-semibold">
               <LiveIcon color={project.color} />
               <span>Live</span>
             </a>

@@ -37,10 +37,12 @@ body {
 }
 
 @keyframes float-slow {
+
   0%,
   100% {
     transform: translateY(0) rotate(1deg);
   }
+
   50% {
     transform: translateY(-10px) rotate(-1deg);
   }
@@ -50,19 +52,23 @@ body {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
 }
 
 @keyframes gridPulse {
+
   0%,
   100% {
     opacity: 0.1;
   }
+
   50% {
     opacity: 0.3;
   }
@@ -137,10 +143,12 @@ body {
 }
 
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-20px);
   }
@@ -154,10 +162,12 @@ body {
 }
 
 @keyframes blink {
+
   from,
   to {
     opacity: 1;
   }
+
   50% {
     opacity: 0;
   }
@@ -216,6 +226,7 @@ pre[class*="language-"] {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -248,18 +259,22 @@ pre[class*="language-"] {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
     overflow-x: hidden;
   }
 }
+
 /* Add these classes to adjust the grid colors in the top-left and bottom-right */
 .top-left-grid {
   background-color: white;
-  opacity: 0.8; /* Make it more visible */
+  opacity: 0.8;
+  /* Make it more visible */
 }
 
 .bottom-right-grid {
   background-color: white;
-  opacity: 0.8; /* Make it more visible */
+  opacity: 0.8;
+  /* Make it more visible */
 }

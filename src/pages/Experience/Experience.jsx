@@ -28,33 +28,35 @@ const ExperienceCard = ({
     className="group relative rounded-xl"
   >
     {/* Premium gradient border */}
-    <div className="absolute -inset-[1.5px] bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 rounded-xl opacity-0 group-hover:opacity-100 transition duration-500 blur-sm" />
+    <div className="absolute -inset-[1.5px] bg-gradient-to-r from-sky-500 via-indigo-500 to-violet-600 rounded-xl opacity-0 group-hover:opacity-100 transition duration-500 blur-sm" />
 
     {/* Card */}
-    <div className="relative bg-gray-900/80 backdrop-blur-xl border border-white/10 rounded-xl p-7 h-full">
+    <div className="relative bg-white/90 backdrop-blur-xl border border-slate-200 rounded-xl p-7 h-full transition-all duration-300 group-hover:border-slate-300 shadow-md hover:shadow-lg">
       {/* Icon */}
       <motion.div
         animate={{ y: [0, -6, 0] }}
         transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
         className="mb-5"
       >
-        <Icon className="w-10 h-10 text-cyan-400" />
+        <div className="w-12 h-12 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center">
+          <Icon className="w-6 h-6 text-indigo-600" />
+        </div>
       </motion.div>
 
       {/* Content */}
       <div className="space-y-3">
-        <h3 className="text-xl font-semibold text-white tracking-wide">
+        <h3 className="text-xl font-bold text-slate-800 tracking-wide">
           {title}
         </h3>
 
-        <div className="flex justify-between items-center text-sm text-gray-400">
-          <span className="text-blue-400 font-medium">{company}</span>
-          <span className="px-2 py-0.5 rounded-md bg-white/5 border border-white/10">
+        <div className="flex justify-between items-center text-sm">
+          <span className="text-indigo-600 font-bold">{company}</span>
+          <span className="px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200 text-slate-500 text-xs font-semibold">
             {period}
           </span>
         </div>
 
-        <p className="text-gray-300 leading-relaxed text-[15px] pt-2">
+        <p className="text-slate-600 leading-relaxed text-[15px] pt-2 font-medium">
           {description}
         </p>
       </div>
@@ -95,8 +97,8 @@ const ExperienceSection = () => {
       className="bg-transparent pt-6 md:pt-8 pb-12 md:pb-16 relative overflow-hidden"
     >
       {/* Background glow */}
-      <div className="absolute top-20 left-20 w-96 h-96 bg-cyan-500/10 blur-3xl rounded-full" />
-      <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/10 blur-3xl rounded-full" />
+      <div className="absolute top-20 left-20 w-96 h-96 bg-sky-400/[0.08] blur-[120px] rounded-full" />
+      <div className="absolute bottom-20 right-20 w-96 h-96 bg-indigo-400/[0.08] blur-[120px] rounded-full" />
 
       <div className="relative container mx-auto px-4 sm:px-6">
         {/* Header */}
@@ -107,10 +109,11 @@ const ExperienceSection = () => {
           viewport={{ once: true }}
           className="text-center mb-8 md:mb-12"
         >
-          <h2 className="text-4xl md:text-6xl font-bold text-transparent bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text">
+          <p className="text-indigo-600 text-sm font-bold tracking-widest uppercase mb-3">Career</p>
+          <h2 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-indigo-600 to-sky-600 bg-clip-text">
             Experience
           </h2>
-          <p className="text-gray-400 mt-4 max-w-xl mx-auto">
+          <p className="text-slate-500 mt-4 max-w-xl mx-auto font-semibold">
             Professional work and technical involvement
           </p>
         </motion.div>

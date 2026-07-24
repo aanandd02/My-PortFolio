@@ -60,7 +60,7 @@ export default function App() {
 
 function SectionFallback({ label }) {
   return (
-    <div className="min-h-[55vh] grid place-items-center text-cyan-300/80 text-sm tracking-wide">
+    <div className="min-h-[55vh] grid place-items-center text-sky-300/60 text-sm tracking-widest uppercase font-medium">
       {label}
     </div>
   );
@@ -68,7 +68,7 @@ function SectionFallback({ label }) {
 
 function GlobalBackground() {
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0 opacity-20">
+    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0 opacity-10">
       <div className="absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,transparent_0%,black)]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -81,9 +81,9 @@ function GlobalBackground() {
               width="40"
               height="40"
               fill="none"
-              stroke="white"
+              stroke="#64748b"
               strokeWidth="0.5"
-              className="opacity-40"
+              className="opacity-15"
             />
           </pattern>
           <rect width="100%" height="100%" fill="url(#grid)" />

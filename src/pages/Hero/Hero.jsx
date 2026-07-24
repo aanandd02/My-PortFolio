@@ -13,8 +13,7 @@ export default function Hero() {
   const [resumeUrl, setResumeUrl] = useState(() => getPublicResumeUrl());
 
   // Code block with Anand
-  const [code] = useState(`
-const profile = {
+  const [code] = useState(`const profile = {
     name: 'Anand',
     skills: [
         'Java', 'JavaScript', 'Python', 'Node.js', 'Express.js',
@@ -34,8 +33,7 @@ const profile = {
             this.skills.length >= 10
         );
     }
-};
-`);
+};`);
 
   useEffect(() => {
     Prism.highlightAll();
@@ -65,66 +63,79 @@ const profile = {
 
   return (
     <>
-      <main className="pt-20 md:pt-20 bg-[#020617] text-white min-h-screen">
+      <main className="pt-20 md:pt-20 bg-[#f8fafc] text-[#1e293b] min-h-screen">
         <section
           id="home"
           className="hero min-h-[calc(100vh-5rem)] scroll-mt-28 flex items-center relative px-4 sm:px-6 lg:px-8"
         >
-          <div className="absolute inset-0"></div>
+          {/* Ambient background glows - light cool colors */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-1/4 -left-20 w-[500px] h-[500px] bg-sky-400/[0.12] rounded-full blur-[120px]"></div>
+            <div className="absolute bottom-1/4 -right-20 w-[400px] h-[400px] bg-indigo-400/[0.12] rounded-full blur-[120px]"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-400/[0.08] rounded-full blur-[150px]"></div>
+          </div>
 
           <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between relative z-10 py-12 lg:py-0">
             {/* Left column - Text content */}
             <div className="w-full lg:w-1/2 mb-12 lg:mb-0 animate__animated animate__fadeInLeft relative">
-              <div className="absolute hidden lg:-top-20 lg:-left-20 lg:block w-48 h-48 lg:w-64 lg:h-64 bg-blue-500/10 rounded-full blur-3xl"></div>
-              <div className="absolute hidden lg:block lg:top-40 lg:-right-20 w-48 h-48 lg:w-64 lg:h-64 bg-teal-500/10 rounded-full blur-3xl"></div>
 
-              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 mb-6 sm:mb-8 animate__animated animate__fadeInDown animate__delay-1s">
-                <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></div>
-                <span className="text-gray-300 text-xs sm:text-sm font-medium">
-                  Welcome to my Portfolio
+              {/* Status badge */}
+              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/80 backdrop-blur-md border border-slate-200 shadow-sm mb-8 animate__animated animate__fadeInDown animate__delay-1s">
+                <div className="relative">
+                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-500"></div>
+                  <div className="absolute inset-0 w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></div>
+                </div>
+                <span className="text-slate-600 text-xs sm:text-sm font-semibold tracking-wide">
+                  Available for opportunities
                 </span>
               </div>
 
-              <div className="relative mb-6 sm:mb-8">
-                <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight">
+              {/* Main heading */}
+              <div className="relative mb-8">
+                <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight tracking-tight">
                   <SparklesText text="Hello" />
-                  <span className="relative inline-block">
-                    I'm
-                    <span className="typing-effect gradient-text"> Anand</span>
+                  <span className="relative block mt-2">
+                    <span className="text-slate-800">I'm </span>
+                    <span className="gradient-text font-extrabold">Anand</span>
                   </span>
                 </h1>
-                <div className="absolute -z-10 top-1/2 -translate-y-1/2 left-1/4 w-24 sm:w-32 h-24 sm:h-32 bg-blue-500/20 rounded-full blur-2xl"></div>
               </div>
 
-              <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 rounded-xl sm:rounded-2xl bg-gradient-to-r from-blue-500/10 to-teal-500/10 border border-blue-500/20 mb-6 sm:mb-8 backdrop-blur-sm animate__animated animate__fadeInUp animate__delay-1s">
-                <i className="fas fa-rocket text-blue-400 animate-bounce text-sm sm:text-base"></i>
+              {/* Role badge */}
+              <div className="inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-white/80 backdrop-blur-md border border-slate-200 shadow-sm mb-8 animate__animated animate__fadeInUp animate__delay-1s">
+                <div className="w-1.5 h-8 rounded-full bg-gradient-to-b from-sky-500 to-indigo-600"></div>
                 <span>
                   <FlipWords
-                    className={"text-lg sm:text-xl text-blue-400 font-medium"}
+                    className={"text-lg sm:text-xl text-indigo-600 font-bold tracking-wide"}
                     words={words}
                   />
                 </span>
               </div>
 
-              <div className="relative mb-8 sm:mb-12 max-w-xl">
-                <p className="text-base sm:text-xl text-gray-300/90 leading-relaxed">
-                  A glimpse into my professional journey
+              {/* Subtitle */}
+              <div className="relative mb-10 max-w-xl">
+                <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-medium">
+                  Building scalable backend systems & shipping products that solve real problems.
                 </p>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 animate__animated animate__fadeInUp animate__delay-2s">
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 animate__animated animate__fadeInUp animate__delay-2s">
                 {/* LinkedIn Button */}
                 <a
                   href="https://www.linkedin.com/in/aanandd02/"
                   target="_blank"
                   rel="noopener noreferrer"
                   onMouseEnter={playHoverSound}
-                  className="group relative inline-flex items-center justify-center gap-3 bg-gradient-to-r from-blue-500 to-teal-400 p-0.5 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-[0_0_2rem_-0.5rem_#60A5FA]"
+                  className="group relative inline-flex items-center justify-center gap-3 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-[0_10px_30px_rgba(99,102,241,0.25)]"
                 >
-                  <span className="block w-full px-6 sm:px-8 py-3 sm:py-4 rounded-[11px] bg-gray-900 transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-teal-400">
-                    <span className="relative flex items-center justify-center gap-2 text-white font-medium">
+                  <span className="block w-full px-7 py-3.5 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 transition-all duration-300 group-hover:from-sky-400 group-hover:to-indigo-500">
+                    <span className="relative flex items-center justify-center gap-2.5 text-white font-bold tracking-wide">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                      </svg>
                       <span>LinkedIn</span>
-                      <i className="fas fa-arrow-right transform transition-all duration-300 group-hover:translate-x-1"></i>
+                      <i className="fas fa-arrow-right transform transition-all duration-300 group-hover:translate-x-1 text-sm"></i>
                     </span>
                   </span>
                 </a>
@@ -135,32 +146,38 @@ const profile = {
                   target="_blank"
                   rel="noopener noreferrer"
                   onMouseEnter={playHoverSound}
-                  className="group relative inline-flex items-center justify-center gap-3 p-0.5 rounded-xl bg-gradient-to-r from-gray-800 to-gray-700 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_2rem_-0.5rem_#60A5FA]"
+                  className="group relative inline-flex items-center justify-center gap-3 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-[0_10px_25px_rgba(148,163,184,0.15)]"
                 >
-                  <span className="block w-full px-6 sm:px-8 py-3 sm:py-4 rounded-[11px] bg-gray-900 border border-gray-700/50 transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-gray-800 group-hover:to-gray-700">
-                    <span className="relative flex items-center justify-center gap-2 text-gray-300 font-medium group-hover:text-white">
+                  <span className="block w-full px-7 py-3.5 rounded-xl bg-white border border-slate-200 shadow-sm transition-all duration-300 group-hover:bg-slate-50 group-hover:border-slate-300">
+                    <span className="relative flex items-center justify-center gap-2.5 text-slate-700 font-bold tracking-wide group-hover:text-slate-900">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-500 group-hover:text-slate-700">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                      </svg>
                       <span>Resume</span>
-                      <i className="fas fa-envelope transform transition-all duration-300 group-hover:rotate-12"></i>
                     </span>
                   </span>
                 </a>
               </div>
 
               {/* Floating badges */}
-              <div className="hidden lg:block absolute left-[5.5rem] top-[2.3rem] animate-float-slow">
-                <div className="px-4 py-2 rounded-lg bg-purple-500/10 backdrop-blur-sm border border-purple-500/20 text-purple-400">
-                  <i className="fas fa-wand-magic-sparkles"></i>
+              <div className="hidden lg:block absolute left-[6rem] top-[2.3rem] animate-float-slow">
+                <div className="px-3.5 py-1.5 rounded-lg bg-white border border-slate-200 text-indigo-600 text-sm font-semibold shadow-md shadow-indigo-500/5">
+                  <i className="fas fa-wand-magic-sparkles text-xs"></i>
                   &nbsp;&nbsp;Precision
                 </div>
               </div>
               <div className="hidden lg:block absolute right-10 top-20 animate-float">
-                <div className="px-4 py-2 rounded-lg bg-blue-500/10 backdrop-blur-sm border border-blue-500/20 text-blue-400">
-                  <i className="fas fa-code"></i>&nbsp;&nbsp;Simplicity
+                <div className="px-3.5 py-1.5 rounded-lg bg-white border border-slate-200 text-sky-600 text-sm font-semibold shadow-md shadow-sky-500/5">
+                  <i className="fas fa-code text-xs"></i>&nbsp;&nbsp;Simplicity
                 </div>
               </div>
               <div className="hidden lg:block absolute top-[17rem] left-[70%] transform -translate-x-1/2 animate-float">
-                <div className="px-4 py-2 rounded-lg bg-amber-500/10 backdrop-blur-sm border border-amber-500/20 text-amber-400">
-                  <i className="fas fa-lightbulb"></i>&nbsp;&nbsp;Innovation
+                <div className="px-3.5 py-1.5 rounded-lg bg-white border border-slate-200 text-amber-600 text-sm font-semibold shadow-md shadow-amber-500/5">
+                  <i className="fas fa-lightbulb text-xs"></i>&nbsp;&nbsp;Innovation
                 </div>
               </div>
             </div>
@@ -168,14 +185,17 @@ const profile = {
             {/* Right column - Code window */}
             <div className="w-full lg:w-1/2 animate__animated animate__fadeInDown animate__delay-0.1s">
               <div className="w-full">
-                <div className="gradient-border">
-                  <div className="code-window bg-[#091121]">
+                <div className="gradient-border shadow-2xl shadow-indigo-500/10">
+                  <div className="code-window bg-[#0f172a]">
                     <div className="window-header">
-                      <div className="window-dot bg-red-500"></div>
-                      <div className="window-dot bg-yellow-500"></div>
-                      <div className="window-dot bg-green-500"></div>
-                      <span className="ml-2 text-sm text-gray-400 flex items-center gap-2">
-                        <i className="fas fa-code"></i>
+                      <div className="window-dot bg-red-500/80"></div>
+                      <div className="window-dot bg-yellow-500/80"></div>
+                      <div className="window-dot bg-green-500/80"></div>
+                      <span className="ml-3 text-xs text-slate-400 flex items-center gap-2 font-mono">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-yellow-500/60">
+                          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
                         about.js
                       </span>
                     </div>
@@ -191,10 +211,12 @@ const profile = {
 
         {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce flex flex-col items-center gap-2">
-          <span className="text-gray-400 text-sm flex items-center gap-2">
-            <i className="fas fa-mouse text-blue-400"></i>
+          <span className="text-slate-400 text-xs flex items-center gap-2 tracking-widest uppercase font-semibold">
+            Scroll
           </span>
-          <i className="fas fa-chevron-down text-blue-400 text-xl"></i>
+          <div className="w-5 h-8 rounded-full border-2 border-slate-300 flex justify-center pt-1.5">
+            <div className="w-1 h-2 rounded-full bg-indigo-500/60 animate-bounce"></div>
+          </div>
         </div>
         <PortfolioPage />
       </main>
