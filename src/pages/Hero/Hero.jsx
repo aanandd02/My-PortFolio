@@ -186,13 +186,13 @@ export default function Hero() {
             <div className="w-full lg:w-1/2 animate__animated animate__fadeInDown animate__delay-0.1s">
               <div className="w-full">
                 <div className="gradient-border shadow-2xl shadow-indigo-500/10">
-                  <div className="code-window bg-[#0f172a]">
-                    <div className="window-header">
-                      <div className="window-dot bg-red-500/80"></div>
-                      <div className="window-dot bg-yellow-500/80"></div>
-                      <div className="window-dot bg-green-500/80"></div>
-                      <span className="ml-3 text-xs text-slate-400 flex items-center gap-2 font-mono">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-yellow-500/60">
+                  <div className="code-window bg-white border border-slate-200">
+                    <div className="window-header !bg-slate-50 !border-b !border-slate-200">
+                      <div className="window-dot bg-red-400"></div>
+                      <div className="window-dot bg-amber-400"></div>
+                      <div className="window-dot bg-emerald-400"></div>
+                      <span className="ml-3 text-xs text-slate-500 flex items-center gap-2 font-mono font-semibold">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-indigo-500">
                           <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                           <polyline points="9 22 9 12 15 12 15 22"></polyline>
                         </svg>
